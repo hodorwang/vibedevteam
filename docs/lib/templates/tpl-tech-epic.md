@@ -42,11 +42,22 @@
 
 ### 2.2 复用清单（避免重复造轮子）
 
-> 写清楚“能复用什么、怎么复用、为什么不复用”。
+> 写清楚"能复用什么、怎么复用、为什么不复用"。
+>
+> ⚠️ **代码引用格式要求**：
+> - ✅ 使用文件路径:行号引用（如 `src/services/UserService.ts:123-456`）
+> - ❌ 禁止粘贴完整代码实现
+> - ✅ 简短描述职责和关键逻辑
+> - ❌ TECH 文档代码占比不应超过 30%
 
-- 可复用能力/组件：`...`
-- 需要扩展的既有能力：`...`
-- 不复用的理由（如适用）：`...`
+- 可复用能力/组件：
+  - `[文件路径:行号]` - 职责描述
+  - 示例：`src/services/AuthService.js:50-120` - 用户认证逻辑，包含登录、登出、token 刷新
+- 需要扩展的既有能力：
+  - `[文件路径:行号]` - 扩展点说明
+  - 示例：`src/api/userApi.ts:200-250` - 需要增加批量用户同步接口
+- 不复用的理由（如适用）：
+  - 组件名称 - 不复用原因（如：架构不匹配、性能不足、维护成本高）
 
 ### 2.3 硬约束
 
@@ -144,39 +155,41 @@ flowchart LR
 
 ### 7.1 代码修改清单（Critical - 纵向追踪） ⭐
 
-> **⚠️ 重要**：新增字段/功能时，必须列出所有修改点。避免遗漏（参考 Epic 013 Bug 案例）。
+> **⚠️ 重要**：新增字段/功能时，必须列出所有修改点。避免遗漏（常见的遗漏点包括 Update 方法、测试用例等）。
 >
-> **详见**：`docs/_project/conventions/db-conventions.md` 第 6.4 节
+> **项目特定规范**：如果项目有 `db-conventions.md` 或类似文档，请参考其中的纵向追踪规范。
 
-**修改清单模板**：
+**修改清单模板**（根据项目实际技术栈调整）：
 
-#### Model 层
-- [ ] `internal/models/*.go:XX` 添加字段定义（GORM tag + JSON tag）
+#### 数据/模型层（Data/Model Layer）
+- [ ] `[项目模型文件路径]` 添加字段定义
+  - 示例：`src/models/User.ts` (TypeScript) 或 `internal/models/user.go` (Go)
+  - 包含：数据类型、验证规则、序列化配置
 
-#### Migration 层
-- [ ] `migrations/VX.X__description.up.sql` 添加迁移脚本
-- [ ] `migrations/VX.X__description.down.sql` 添加回滚脚本
-- [ ] 执行迁移并验证：`PRAGMA table_info(table_name);`
+#### 数据库迁移层（Migration Layer）
+- [ ] `[迁移脚本路径]` 添加迁移脚本（Up/Down）
+  - 示例：`migrations/V1.2.3__add_field_name.up.sql`
+- [ ] 执行迁移并验证数据完整性
 
-#### Handler 层（3个位置）
-- [ ] `internal/handlers/*_handler.go:XX` Create 请求解析
-- [ ] `internal/handlers/*_handler.go:XX` Update 请求解析
-- [ ] `internal/handlers/*_handler.go:XX` 响应格式化（如需要）
+#### API/Handler 层（3个位置）
+- [ ] `[API/Handler 文件路径]` Create 请求解析
+- [ ] `[API/Handler 文件路径]` Update 请求解析
+- [ ] `[API/Handler 文件路径]` 响应格式化（如需要）
 
-#### Service 层（2个方法）← **最容易遗漏**
-- [ ] `internal/services/*_service.go:XX` Create 方法保存字段
-- [ ] `internal/services/*_service.go:XX` **Update 方法更新字段** ⭐
+#### 业务逻辑/Service 层（2个方法）← **最容易遗漏**
+- [ ] `[Service 文件路径]` Create 方法保存字段
+- [ ] `[Service 文件路径]` **Update 方法更新字段** ⭐
 
 #### 测试层（端到端）
-- [ ] `internal/services/*_test.go` Create 测试
-- [ ] `internal/services/*_test.go` **Update 测试** ⭐
-- [ ] `internal/services/*_test.go` 数据库验证
+- [ ] `[测试文件路径]` Create 测试用例
+- [ ] `[测试文件路径]` **Update 测试用例** ⭐
+- [ ] `[测试文件路径]` 数据验证测试
 
-#### 验证命令
-```bash
-# 快速验证所有修改点
-./scripts/check-new-field.sh FieldName
-```
+#### 验证清单
+- [ ] 所有层都添加了新字段的处理
+- [ ] Update 方法没有遗漏
+- [ ] 测试覆盖了 Create 和 Update 场景
+- [ ] 迁移脚本可回滚
 
 ---
 
@@ -186,3 +199,40 @@ flowchart LR
 
 - `[CONFLICT_WITH_BASELINE]`：`...`
 - ADR 草案要点：`...`
+
+---
+
+## 9. TECH 文档质量检查清单（输出前必须自检）
+
+> **⚠️ 重要**：在输出 TECH 文档前，必须完成以下自检。
+
+### 9.1 内容结构检查
+- [ ] 是否包含架构图或流程图？（而非只有文字描述）
+- [ ] 复用清单是否清晰列出了可复用组件？
+- [ ] 是否明确标注了 `[ASSUMPTION]` 和 `[VERIFIED]`？
+- [ ] 接口定义是否完整（请求/响应/错误码）？
+
+### 9.2 代码占比检查（Critical）
+- [ ] 代码块占比是否 < 30%？
+- [ ] 所有代码是否通过文件路径引用？
+- [ ] 是否避免了粘贴完整实现代码？
+- [ ] API 契约和伪代码是否仅保留关键部分？
+
+### 9.3 可落地性检查
+- [ ] TASK 拆解是否可执行？（而非模糊的"优化XXX"）
+- [ ] 依赖关系是否清晰？
+- [ ] 风险和未决项是否显式标注？
+- [ ] 迁移和回滚方案是否可行？
+
+### 9.4 文档一致性检查
+- [ ] 是否引用了上游文档（biz/prd/story）？
+- [ ] 是否与项目基线保持一致？
+- [ ] 术语是否与上游文档一致？
+
+### 9.5 常见错误检查
+- [ ] 是否避免了项目特定的硬编码路径？
+- [ ] 是否避免了粘贴大段代码实现？
+- [ ] 是否避免了假设"应该有这个字段/接口"？
+- [ ] 是否所有设计决策都有代码引用来源？
+
+**如果以上任何一项不通过，请修改文档后再输出。**
