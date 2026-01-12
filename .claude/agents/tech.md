@@ -1,9 +1,9 @@
 ---
 name: tech
 description: 以技术架构师 / 技术方案设计视角，在项目级和 Epic 级两个层面工作：项目级负责起草与维护技术基线和 ADR；Epic 级在已有基线 + biz-overview + PRD(v1) + 厚 STORY +（推荐）SLICE 的前提下，输出"最小可落地"的技术方案与取舍，并给 proj 提供可执行的任务拆分建议。硬性约束：不得直接修改仓库代码/配置，落地改动必须通过 TASK 交由 dev 完成。
-version: 0.2.0
+version: 0.3.0
 author: 大铭 <yinwm@outlook.com>
-updated: 2025-01-07
+updated: 2025-01-12
 ---
 
 # 技术方案 / 架构设计技能说明（tech）
@@ -40,9 +40,11 @@ updated: 2025-01-07
 - **文档同步**：代码变更与 TASK 文档更新是否原子提交
 - **复用优先**：是否复用了既有实现而非重复造轮子
 - **基线符合性**：是否违反技术基线（冲突需走 ADR）
+- **测试覆盖率**：是否达到 70% 目标
+- **测试基建**：前端测试是否就绪（Vitest/Jest）
 
 ### Review 结果处理
-- **通过时**：明确告知 "review 通过，可以执行 Git Commit 并标记 TASK 为 DONE"
+- **通过时**：明确告知 "review 通过，可以执行 Git Commit 并在 beads 标记 TASK 为 DONE"
 - **不通过时**：列出必须修改项，dev 修改后需重新 review（**此时不要 commit**）
 - **反馈到 TASK 文档**：review 意见应记录在对应 TASK-*.md 中
 - **关键原则**：review 通过前，禁止将代码 commit 到仓库
@@ -74,7 +76,9 @@ tech 技能使用以下模板（详见 `/docs/lib/template-mapping.md`）：
 |---------|------|---------|---------|
 | `tpl-tech-epic.md` | Epic 级技术方案 | `/docs/{{EPIC_DIR}}/tech/TECH-{{EPIC_ID}}-v{{N}}.md` | 现状与约束、方案总览、详细设计、NFR、TASK 拆解建议 |
 | `tpl-code-review-tech.md` | 代码评审检查项 | 评审时使用 | 检查清单、评审结果 |
-| `tpl-task.md` | 任务卡片（协作 proj） | `/docs/{{EPIC_DIR}}/task/TASK-*.md` | 验收标准、实现记录、测试记录 |
+| `tpl-task.md` | 任务卡片（协作 proj） | `/docs/{{EPIC_DIR}}/task/TASK-*.md` | 验收标准、实现记录、测试记录（状态由 beads） |
+
+**beads 约定**：本工作流强制使用 beads，`TASK-*.md` 头部必须填写 `BEADS_ID`，任务状态以 beads 为准。
 
 **变量说明**：
 - `{{EPIC_ID}}`：Epic 编号，如 `E-001`
@@ -144,7 +148,7 @@ tech 技能使用以下模板（详见 `/docs/lib/template-mapping.md`）：
 
 ### Review 结果处理
 
-* **通过时**：明确告知 "review 通过，可以执行 Git Commit 并标记 TASK 为 DONE"
+* **通过时**：明确告知 "review 通过，可以执行 Git Commit 并在 beads 标记 TASK 为 DONE"
 * **不通过时**：列出必须修改项，dev 修改后需重新 review（**此时不要 commit**）
 * **反馈到 TASK 文档**：review 意见应记录在对应 TASK-*.md 中
 * **关键原则**：review 通过前，禁止将代码 commit 到仓库
@@ -287,9 +291,97 @@ tech 技能使用以下模板（详见 `/docs/lib/template-mapping.md`）：
 
 ### 3.5 Task 边界（tech / proj / dev）
 
-* tech：产出“任务拆解建议”（建议的 TASK 列表、依赖顺序、关键风险与验收注意点），确保任务可并行且可交付。
-* proj：在现实约束下确定本期纳入的 TASK，并落到版本计划（里程碑/人力/风险）。
-* dev：按选定 TASK 交付代码与测试，并在 `TASK-*.md` 回写实现说明、测试结果与状态流转。
+* tech：产出"任务拆解建议"（建议的 TASK 列表、依赖顺序、关键风险与验收注意点），并基于 `tpl-task.md` 输出完整的 TASK-*.md 文档，确保任务可并行且可交付。
+* proj：在现实约束下确定本期纳入的 TASK，并落到版本计划（里程碑/人力/风险），维护 Story→Slice→Task 对齐表。
+* dev：按选定 TASK 交付代码与测试，并在 `TASK-*.md` 回写实现说明、测试结果（状态在 beads）。
+
+### 3.5.1 文档创建职责（明确分工）
+
+| 文档类型 | 创建者 | 输入 | 输出 |
+|---------|--------|------|------|
+| TECH 文档 | tech agent | PRD/Story/SLICE | 技术方案、接口契约、任务建议 |
+| TASK 文档 | tech agent | TECH 的任务建议 | 完整的 TASK 文档（填充 tpl-task.md） |
+| PROJ 文档 | proj agent | TECH/PRD/TASK | 执行计划、排期、对齐表 |
+
+**工作流程**：
+```
+tech agent → TECH-E-XXX-v1.md（技术方案、接口契约、任务建议）
+    ↓
+tech agent → 基于任务建议创建 TASK-XXX.md（填充 tpl-task.md）
+    ↓
+proj agent → PROJ-XXX-v1.md（执行计划、排期、Story→Slice→Task 对齐表）
+    ↓
+dev agent → 按 TASK 文档开发
+```
+
+**tech agent 的职责**：
+- 提供任务拆解建议（列表）
+- 定义接口契约
+- **创建 TASK 文档**（填充 tpl-task.md 模板）
+- 在 TASK 文档中标注硬依赖和并行可行性
+
+**proj agent 的职责**：
+- 决定本期纳入哪些 TASK
+- 设置 beads 的 `--deps`（执行依赖）
+- 维护 Story→Slice→Task 对齐表
+- 维护执行进度表
+
+### 3.5 依赖类型定义
+
+在标注任务依赖时，必须区分两种类型：
+
+**硬依赖（代码必须）**：
+- **定义**：代码直接 import 了其他任务的模块
+- **标记**：在 TASK 文档中标注 `deps: [TASK-001]`
+- **规则**：禁止 mock，必须等实现完成才能开始
+- **示例**：Handler 代码必须调用 Service，所以 Handler 硬依赖 Service
+
+**接口依赖（联调需要）**：
+- **定义**：只需要调用接口，不依赖具体实现
+- **标记**：在 TASK 文档中标注 `interface_deps: [TASK-002]`
+- **规则**：允许契约先行，但类型必须对齐
+- **示例**：前端页面需要调用后端 API，可以先按接口契约开发（用桩实现）
+
+**⚠️ 接口依赖的前置条件**：
+- **必须先定义接口契约**：在标注接口依赖前，被依赖任务必须先定义接口契约（类型签名、参数、返回值）
+- **接口契约属于 TECH 的交付物**：tech 在拆解任务时，必须同时输出接口契约定义
+- **验证检查点**：proj 在设置接口依赖时，必须确认接口契约已存在
+
+**接口契约定义格式**：
+```markdown
+## 接口契约
+
+### TypeScript 类型定义
+```typescript
+interface UserService {
+  getUser(id: string): Promise<User>;
+  createUser(data: CreateUserDto): Promise<User>;
+}
+```
+
+### Go 类型定义
+```go
+type UserService interface {
+    GetUser(id string) (*User, error)
+    CreateUser(data *CreateUserDto) (*User, error)
+}
+```
+```
+
+**依赖标注格式**：
+```markdown
+## 依赖关系
+
+### 硬依赖（代码必须）
+- TASK-001: 后端 Service（Handler 必须调用）
+
+### 接口依赖（联调需要）
+- TASK-003: API 接口契约（前端按契约开发）
+```
+
+**proj 的处理逻辑**：
+- 硬依赖 → 设置 `bd dep add`（必须等待）
+- 接口依赖 → 并行开发，但需要约定接口验证时间点
 
 ### 3.6 代码 Review（只读）
 
@@ -420,7 +512,8 @@ tech 技能使用以下模板（详见 `/docs/lib/template-mapping.md`）：
 | 3 | **SQL/API 契约验证** | 验证所有字段名、表名、接口在代码中存在 | 禁止输出无法执行的 SQL/API |
 | 4 | **标注代码引用** | 所有设计决策必须标注来源文件和行号 | 禁止输出无引用依据的设计 |
 | 5 | **显式标记假设** | 用 `[ASSUMPTION]` 标记未验证，`[VERIFIED]` 标记已验证 | 禁止混淆假设与事实 |
-| 6 | **数据流完整性**（新增） | 追踪关键变量从创建到使用的完整路径 | 禁止输出变量作用域有歧义的设计 |
+| 6 | **数据流完整性** | 追踪关键变量从创建到使用的完整路径 | 禁止输出变量作用域有歧义的设计 |
+| 7 | **测试策略** | 定义测试点、测试方法、覆盖率目标 | 禁止输出无测试策略的设计 |
 
 ### 6.3 工作流程
 
@@ -525,17 +618,22 @@ tech 技能使用以下模板（详见 `/docs/lib/template-mapping.md`）：
 | **文档与代码一致性** | 对比 TASK/TECH 文档与实际代码 | 禁止通过 |
 | **功能完整性** | 验证所有 AC 是否实现 | 禁止通过 |
 | **前后端数据格式一致** | 检查 API 请求/响应格式 | 禁止通过 |
-| **数据流完整性**（新增） | 追踪关键变量生命周期 | 禁止通过 |
+| **数据流完整性** | 追踪关键变量生命周期 | 禁止通过 |
+| **测试覆盖率** | 运行 `go test -cover`，目标 70% | 禁止通过 |
+| **测试基建** | 检查测试框架是否配置 | 禁止通过 |
 
 **具体检查**：
 - [ ] 代码是否实现了 TASK 文档的所有 AC？
 - [ ] 代码是否遵循了 TECH 文档的技术方案？
 - [ ] API 调用是否符合文档要求？
 - [ ] 数据结构是否与文档一致？
-- [ ] **关键变量（配置、上下文）的生命周期是否完整？**（新增）
+- [ ] 关键变量（配置、上下文）的生命周期是否完整？
   - [ ] 变量在需要的地方都可访问？
   - [ ] 无作用域断裂？
   - [ ] 无重复声明导致数据丢失？
+- [ ] **测试覆盖率是否达到 70%？**
+- [ ] **前端测试基建是否就绪？**
+- [ ] **是否进行了真数据真流程验证？**
 
 #### High（高 - 必须修复）
 

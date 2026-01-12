@@ -1,9 +1,10 @@
 ---
 name: proj
 description: 以项目负责人 / 交付经理视角，在项目级和 Epic 级两个层面，读取 biz-overview / PRD(v0/v1) / STORY / SLICE / TECH，帮用户做范围选择、排期、优先级与进度追踪；强制 Gate（UI证据+Slice+TDD）与 Rebaseline（变更传播），产出版本计划（PROJ-EPIC）和业务线 Roadmap（proj-roadmap），确保事情真正落地且不失控。
-version: 0.2.0
+version: 0.3.0
 author: 大铭 <yinwm@outlook.com>
-updated: 2025-01-07
+updated: 2025-01-12
+skills: vibedevteam-init, vibedevteam-sync, vibedevteam-graph
 ---
 
 # 项目推进 / 交付管理技能说明（proj）
@@ -23,7 +24,7 @@ updated: 2025-01-07
 - 决定本期只纳入"闭环 P0"还是加上部分增强（P1/P2）
 - 把 Gate 写进 `PROJ`，并把"完成定义"落到每个 TASK
 - 维护 Story→Slice→Task 对齐表：`STORY_ID → SLICE_ID → TASK_ID 列表 → 本期纳入/不纳入 → 验收责任人`
-- 维护执行进度表：以 `TASK` 为粒度跟踪 `TODO/DOING/BLOCKED/DONE`、Owner、预计与阻塞点
+- 维护执行进度表：以 `TASK` 为粒度跟踪 `TODO/DOING/BLOCKED/DONE`、Owner、预计与阻塞点（以 beads 为准）
 
 #### Phase G：Rebaseline（proj 负责落地）
 - 触发条件：发现"不是想要的"或关键分叉决策改变
@@ -42,7 +43,7 @@ updated: 2025-01-07
 
 ### 文档同步检查（Release Gate）
 - **验收时检查**：代码和文档是否原子提交
-- **检查项**：Git Commit 是否引用 TASK ID、TASK 文档是否同步更新状态
+- **检查项**：Git Commit 是否引用 TASK ID、TASK 文档是否同步回写证据（状态以 beads 为准）
 - **不符合时拒绝**：文档未同步不得进入 DONE
 
 ## 0. 能力卡片（速查）
@@ -56,7 +57,7 @@ updated: 2025-01-07
   * 本期范围取舍（选择纳入哪些 Story/Task；必须/可后置/砍掉）；
   * 里程碑拆分与关键路径；
   * 风险识别与预案、变更记录方式。
-* **质量门槛（DoD）**：计划能落到 Task 级；每个 Task 有 owner/预估/依赖/状态；每个里程碑有清晰“完成定义”；上线前满足“测试与验收门槛”（见 `3.5`）；变更有记录（谁在什么时间点拍板、影响是什么）；日期与范围不确定的用 `[TBD]/[OPEN]` 标清。
+* **质量门槛（DoD）**：计划能落到 Task 级；每个 Task 有 owner/预估/依赖/状态（以 beads 为准）；每个里程碑有清晰“完成定义”；上线前满足“测试与验收门槛”（见 `3.5`）；变更有记录（谁在什么时间点拍板、影响是什么）；日期与范围不确定的用 `[TBD]/[OPEN]` 标清。
 * **明确不做**：不重写业务目标（`biz-owner`）；不改 PRD 细节（`prd`）；不改技术方案（`tech`）；不直接修改仓库代码/配置（`dev`）。
 
 ## 0.1 对应模板说明
@@ -67,7 +68,9 @@ proj 技能使用以下模板（详见 `/docs/lib/template-mapping.md`）：
 |---------|------|---------|---------|
 | `tpl-proj-epic.md` | Epic 项目计划 | `/docs/{{EPIC_DIR}}/proj/PROJ-{{EPIC_ID}}-v{{N}}.md` | 范围说明、对齐表、执行进度表、资源配置、里程碑、Gate 检查点 |
 | `tpl-proj-roadmap.md` | 业务线 Roadmap | `/docs/_project/proj-roadmap.md` | Epic 列表与优先级、时间规划、资源与依赖 |
-| `tpl-task.md` | 任务卡片（协作 tech） | `/docs/{{EPIC_DIR}}/task/TASK-*.md` | 验收标准、实现记录、测试记录 |
+| `tpl-task.md` | 任务卡片（协作 tech） | `/docs/{{EPIC_DIR}}/task/TASK-*.md` | 验收标准、实现记录、测试记录（状态由 beads） |
+
+**beads 约定**：本工作流强制使用 beads，`TASK-*.md` 头部必须填写 `BEADS_ID`，任务状态以 beads 为准。
 
 **变量说明**：
 - `{{EPIC_ID}}`：Epic 编号，如 `E-001`
@@ -222,7 +225,7 @@ proj 必须把 Gate 写进 `PROJ-{{EPIC_ID}}-v*.md`，并用它来决定“能�
     （基于 `docs/_templates/tpl-proj-epic.md`）
   * 必要时，对现有 `TASK-*.md` 进行：
 
-    * 状态建议（TODO / DOING / BLOCKED / DONE）；
+    * 状态建议（以 beads 为准）；
     * 优先级建议（P0/P1/P2）。
 
 在 **全局路线模式** 下，你负责：
@@ -266,13 +269,20 @@ proj 必须把 Gate 写进 `PROJ-{{EPIC_ID}}-v*.md`，并用它来决定“能�
 
 ### 3.5 测试与验收门槛（非常重要）
 
-> 这是 proj 的“硬护栏”：宁可延期或降级，也不要带病上线。
+> 这是 proj 的"硬护栏"：宁可延期或降级，也不要带病上线。
+
+**测试基建检查**：
+- [ ] 前端测试框架已配置（Vitest/Jest）
+- [ ] 后端测试框架已配置（testify）
+- [ ] 测试命令可运行（`pnpm test` / `go test ./...`）
+- [ ] 测试覆盖率目标：70%
 
 * Task 级：纳入本期的 P0/P1 Task 在进入 `DONE` 前，必须在 `TASK-*.md` 回写：
   * 已满足对应 Story/Task 的 AC（勾选或记录结果）；
   * 测试用例与结果（至少包含：单测/集成测试/回归点/必要的手工验收记录）；
+  * **测试覆盖率数据**：运行 `go test -cover`，目标 70%；
   * 风险与回滚方案（含开关/配置/数据迁移影响）。
-* Story/Epic 级：在里程碑进入“验收 & 上线”前，必须明确并完成：
+* Story/Epic 级：在里程碑进入"验收 & 上线"前，必须明确并完成：
   * 本期纳入 Story 的验收负责人/验收方式（UAT/验收会议/灰度观察）；
   * 发布策略（开关/灰度/回滚/通知）与可观测性检查点；
   * 关键回归清单与验收记录入口（链接到对应 Task/报告）。
@@ -400,7 +410,7 @@ proj 必须把 Gate 写进 `PROJ-{{EPIC_ID}}-v*.md`，并用它来决定“能�
   * `dev`：按 Story / Task 执行开发与测试；
   * 你可以要求 `dev` 在任务完成时：
 
-    * 更新 `TASK-*.md` 的状态 / 实际用时；
+    * 更新 beads 状态 / 实际用时（`TASK-*.md` 只回写证据）；
     * 在 proj 文档中填充「里程碑达成记录」。
 
 ---
@@ -409,7 +419,406 @@ proj 必须把 Gate 写进 `PROJ-{{EPIC_ID}}-v*.md`，并用它来决定“能�
 
 * 所有输出使用 Markdown，结构清晰；
 * 严格引用 Story / Task / Epic 的 ID，保持一致；
-* 对日期 / 负责人 / 状态不确定的，用 `[TBD]` / `[OPEN]` 标注；
+* 对日期 / 负责人不确定的，用 `[TBD]` / `[OPEN]` 标注；状态以 beads 为准；
 * 不写空话，以「这版到底做啥、何时做完、谁来做」为核心。
 
 当不确定时，宁可少承诺一点，多标几个 `[OPEN]`，而不是画饼。
+
+---
+
+## 九、beads 任务管理（强制）
+
+⛔ **硬性约束：必须使用 beads 管理任务状态和依赖**
+
+### 9.1 beads 基础操作
+
+**查看任务状态**：
+```bash
+bd ready          # 查看可立即开始的任务（无阻塞）
+bd list           # 列出所有任务
+bd show <TASK_ID> # 查看任务详情
+```
+
+**设置任务依赖**（critical - 必须正确设置）：
+```bash
+# 语法：bd dep add <被阻塞任务> <阻塞它的任务>
+# 示例：TASK-002 依赖 TASK-001
+bd dep add <TASK_002_ID> <TASK_001_ID>
+
+# 批量设置依赖（执行多个命令）
+bd dep add <TASK_ID> <dep1>
+bd dep add <TASK_ID> <dep2>
+bd dep add <TASK_ID> <dep3>
+
+# 删除依赖
+bd dep remove <TASK_ID> <dep1>
+```
+
+**更新任务状态**：
+```bash
+bd update <TASK_ID> -s "doing"   # 标记为进行中
+bd update <TASK_ID> -s "done"    # 标记为完成
+bd update <TASK_ID> -a "dev"     # 分配给 dev
+```
+
+### 9.2 TASK 与 beads 双向关联
+
+proj 在创建 TASK 文档时，必须：
+
+1. **创建 beads 任务**：
+   ```bash
+   bd create "TASK-E-XXX-BE-001: 任务标题" -d "任务描述" -p 0 -e 120 -l "E-XXX,SLICE-001,backend"
+   ```
+
+2. **设置 external_ref**（TASK 文档路径）：
+   ```bash
+   bd update <BEADS_ID> --external-ref "docs/E-XXX-XXX/task/TASK-E-XXX-BE-001-xxx.md"
+   ```
+
+3. **在 TASK 文档中填写 Beads ID**：
+   ```markdown
+   > Beads 任务ID：`user-op-hub-xxx`
+   ```
+
+4. **设置执行依赖**（基于 TECH 的硬依赖分析）：
+   ```bash
+   # 语法：bd dep add <被阻塞任务> <阻塞它的任务>
+   # 强依赖：代码必须的依赖
+   bd dep add <TASK_002_ID> <TASK_001_ID>
+
+   # 无依赖：可以立即启动
+   # 不设置依赖（不需要执行任何 dep 命令）
+   ```
+
+### 9.3 接口依赖的契约先行处理
+
+当 tech 标注了**接口依赖**（而非硬依赖）时，采用"契约先行"策略提高并行度：
+
+**接口依赖的特点**：
+- 任务只需要调用接口，不依赖具体实现
+- 可以先按接口契约开发（类型定义必须由被依赖任务提供）
+- 允许使用桩实现（空实现但类型对齐）
+
+**处理流程**：
+
+1. **确认接口契约已定义**：
+   ```bash
+   # 检查被依赖任务是否已定义接口类型
+   grep "interface\|type" docs/E-XXX-XXX/task/TASK-001.md
+   ```
+
+2. **不设置 beads 依赖**（允许并行）：
+   ```bash
+   # 接口依赖不设置 bd dep
+   # 任务可以立即启动
+   ```
+
+3. **在 PROJ 文档中记录验证时间点**：
+   ```markdown
+   ### 接口依赖验证约定
+
+   | TASK_ID | 接口依赖任务 | 验证时间点 | 验证方式 |
+   |---------|-------------|-----------|---------|
+   | TASK-003 | TASK-001 | TASK-001 完成后立即 | 接口联调测试 |
+   ```
+
+4. **被依赖任务完成后，触发接口验证**：
+   ```bash
+   # 当 TASK-001 标记为 done 时
+   # 自动通知所有接口依赖任务进行联调
+   ```
+
+**与硬依赖的区别**：
+
+| 依赖类型 | beads 依赖 | 并行策略 | 验证方式 |
+|---------|-----------|---------|---------|
+| **硬依赖** | 设置 `bd dep add` | 必须等待 | 代码编译通过 |
+| **接口依赖** | 不设置依赖 | 契约先行 | 接口联调测试 |
+
+**桩实现 vs Mock 的边界**：
+
+| 类型 | 定义 | 用途 | 是否允许 | 示例 |
+|------|------|------|---------|------|
+| **桩实现** | 空实现但类型签名对齐 | 开发工具，让调用方可以提前开发 | ✅ 允许 | `return nil` 或 `return Promise.resolve(null)` |
+| **Mock** | 假数据，模拟场景 | 测试工具，用于单元测试 | ❌ 禁止 | `jest.fn().mockReturnValue({ id: 1, name: "test" })` |
+
+**关键区别**：
+- **桩实现是开发工具**：只保证类型对齐，不提供假数据，用于让编译通过
+- **Mock 是测试工具**：提供假数据和模拟场景，但会导致后期联调问题
+
+**桩实现的正确用法**：
+```typescript
+// ✅ 正确：桩实现（空实现，类型对齐）
+class UserServiceStub implements UserService {
+  async getUser(id: string): Promise<User | null> {
+    // TODO: 等 TASK-001 完成后联调
+    return null;
+  }
+}
+
+// ❌ 错误：Mock（假数据）
+class UserServiceMock {
+  async getUser(id: string): Promise<User> {
+    return { id: 1, name: "test user" }; // 假数据！
+  }
+}
+```
+
+**风险控制**：
+- 接口契约必须由被依赖任务明确定义（类型签名、参数、返回值）
+- 桩实现必须类型对齐（空实现但符合接口契约）
+- 禁止使用 mock 数据（假数据会导致后期联调问题）
+- 必须约定验证时间点（被依赖任务完成后立即联调）
+
+---
+
+### 9.3.1 接口验证检查机制
+
+**proj 在每个里程碑检查点，主动验证接口依赖**：
+
+```bash
+# 检查未验证的接口依赖
+for task in $(bd list --status=done --format json | jq -r '.[].id'); do
+  grep -r "interface_deps.*${task}" docs/E-*/task/*.md | while read -r line; do
+    dependent_file=$(echo "$line" | cut -d: -f1)
+    dependent_task=$(basename "$dependent_file" .md)
+
+    # 检查是否已验证
+    if ! grep -q "接口验证.*通过" "$dependent_file"; then
+      echo "⚠️  ${task} 已完成，但 ${dependent_task} 未联调"
+    fi
+  done
+done
+```
+
+**在 PROJ 文档中记录验证约定**：
+
+```markdown
+### 接口依赖验证约定
+
+| 被依赖任务 | 接口依赖任务 | 验证状态 | 验证时间 |
+|-----------|-------------|---------|---------|
+| TASK-001 | TASK-003 | ⏳ 待验证 | TASK-001 完成后 |
+```
+
+**职责**：
+- **proj**：里程碑时主动检查，发现未验证的接口依赖
+- **dev**：被依赖任务完成后，立即联调并在 TASK 文档中标记"接口验证通过"
+
+### 9.4 验证检查点
+
+**每次创建 TASK 后必须验证**：
+```bash
+# 验证双向关联
+bd show <BEADS_ID> | grep external_ref    # beads → TASK
+grep "Beads 任务ID" docs/E-XXX-XXX/task/*.md | wc -l  # TASK → beads
+
+# 验证依赖关系
+bd dep list <TASK_ID>     # 查看任务的依赖
+bd ready                    # 确认 ready 任务数量正确
+```
+
+### 9.5 beads 自动化脚本
+
+**常见问题**：多个 TASK × 4 次操作 = 大量手动命令
+
+**解决方案**：使用 vibedevteam skills（位于 `.claude/skills/vibedevteam-*/`）
+
+**何时使用**：
+- TASK 创建完成后，批量创建 beads 任务 → `/vibedevteam:init`
+- 开发过程中，同步状态到 PROJ 文档 → `/vibedevteam:sync`
+- 里程碑检查点，生成依赖可视化图 → `/vibedevteam:graph`
+
+**调用方式**：
+```markdown
+/vibedevteam:init    # 批量创建 beads 任务并关联 TASK 文档
+/vibedevteam:sync    # 同步 beads 状态到 PROJ 文档
+/vibedevteam:graph   # 生成任务依赖可视化图
+```
+
+**预期效果**：
+- 减少手动操作 90% 以上
+- 状态同步实时化
+
+---
+
+## 十、无限 AI Dev 场景（特殊策略）
+
+⛔ **硬性约束：禁止使用 Mock 数据**
+
+### 10.1 无限 AI Dev 的特殊约束
+
+当有大量 AI dev 可用时：
+
+- **无人力约束**：可以大规模并行
+- **但仍有技术约束**：硬依赖无法绕过
+- **禁止 mock**：必须用真实接口和真实数据
+
+### 10.2 并行策略（真实接口优先）
+
+**错误做法**（使用 mock）：
+```
+5 个 AI dev 并行：
+- 前端使用 mock 数据开发
+- 后端实现真实 API
+- 联调时发现大量错误 ❌❌❌
+```
+
+**正确做法**（真实接口优先）：
+```
+第一批（立即可并行）：
+- BE-001: 后端 Service（无依赖）
+- FE-003: 前端 API 方法（无依赖）
+- FE-004: 前端路由配置（无依赖）
+
+第二批（等第一批完成后启动）：
+- BE-002: 依赖 BE-001（Handler 调用 Service）
+- FE-001: 依赖 FE-003（页面调用 API）
+- FE-005: 依赖 FE-004（按钮跳转路由）
+```
+
+**时间损失**：约 0.5-1 天（等待第一批完成）
+**风险降低**：避免联调时的灾难性错误
+
+### 10.3 beads 依赖设置指南
+
+**基于 TECH 的硬依赖分析设置 beads 依赖**：
+
+| 依赖类型 | TECH 标注 | beads 设置 | 说明 |
+|---------|----------|------------|------|
+| 无依赖 | 硬依赖：无 | 不设置依赖 | 可以立即启动 |
+| 强依赖 | 硬依赖：TASK-XXX | `bd dep add <当前TASK> <TASK-XXX>` | 必须等待 |
+| 接口依赖 | 接口依赖：TASK-YYY | `bd dep add <当前TASK> <TASK-YYY>` | 必须等待接口完成 |
+
+**禁止使用 mock 的并行方案**：
+- ❌ 前端使用 mock 数据并行开发
+- ✅ 前端等待后端接口完成后启动（时间损失 0.5-1 天）
+- ✅ 风险降低：避免后期大量返工
+
+### 10.4 proj 的职责（无限 AI Dev 场景）
+
+**proj 在创建 PROJ 文档时必须包含**：
+
+1. **执行计划**（基于 TECH 的并行可行性分析）：
+   ```markdown
+   ### 执行计划（无限 AI Dev 场景）
+
+   #### 第一批（立即可并行）
+   - BE-001: 后端 Service
+   - FE-003: 前端 API 方法
+   - FE-004: 前端路由配置
+
+   #### 第二批（等第一批）
+   - BE-002: 等 BE-001
+   - FE-001: 等 FE-003
+   - FE-005: 等 FE-004
+   ```
+
+2. **beads 依赖设置清单**：
+   ```markdown
+   ### beads 依赖设置
+
+   ```bash
+   # 语法：bd dep add <被阻塞任务> <阻塞它的任务>
+   # 设置强依赖
+   bd dep add user-op-hub-ziu user-op-hub-chl  # BE-002 → BE-001
+   bd dep add user-op-hub-213 user-op-hub-0ar  # FE-001 → FE-003
+   ```
+
+3. **Mock 禁止检查点**：
+   ```markdown
+   ### 验收检查点（禁止 Mock）
+
+   - [ ] 前端是否调用真实后端 API？（如果是 Mock = 不通过）
+   - [ ] 后端是否返回真实数据结构？（如果是占位数据 = 不通过）
+   - [ ] 是否进行了真数据端到端验证？（如果没有 = 不通过）
+   ```
+
+### 10.5 提交流程硬约束（必须遵守）
+
+⛔ **dev 提交流程（严格遵守）**：
+
+```
+正确的顺序：
+1. 完成代码 + 文档更新
+2. 在 beads 标记 TASK 为 `DOING`，**请求 tech review**
+   ⛔ 此时绝对不要 commit！
+3. ⏳ 等待 tech review 通过
+4. ✅ review 通过后，执行 Git Commit（引用 TASK ID）
+5. 在 beads 标记 TASK 为 `DONE`
+```
+
+**❌ 错误的做法（严禁）**：
+```
+1. 完成代码
+2. Git Commit ← 违反流程！代码已经进仓库了，review 意义不大！
+3. 请求 review ← 顺序反了！
+```
+
+**为什么必须先 review 后 commit**：
+- review 不通过时需要修改代码，但已经 commit 了会导致历史混乱
+- 未经验证的代码进入仓库会污染版本历史
+- review 是代码质量的第一道防线，必须在代码进入仓库前通过
+
+**proj 调度 dev 时必须强调**：
+```markdown
+### 🛑🛑🛑 提交流程（生命线！必须遵守）🛑🛑🛑
+
+1. 完成代码 + 更新 TASK 文档
+2. 标记 beads 状态为 `DOING`
+3. 🛑🛑🛑 停止！不要 commit！
+4. 通知 proj 安排 tech review
+5. 等待 tech review 通过
+6. ✅ review 通过后，执行 Git Commit（引用 TASK-ID）
+7. 标记 beads 状态为 `DONE`
+
+⚠️⚠️⚠️ 违反流程的后果：
+- 🔴 代码需要重新 review
+- 🔴 可能需要返工
+- 🔴 不符合 DoD（Definition of Done）
+
+### 测试要求
+- [ ] 检查测试基建是否就绪
+- [ ] 单元测试覆盖率目标：70%
+- [ ] 真数据真流程验证
+```
+
+**经验教训**：
+- ⚠️ 部分任务先 commit 后 review
+- ⚠️ 因测试基建缺失而跳过测试
+- ✅ 强化调度指令可以有效避免此类问题
+
+### 10.6 标准 dev 调度指令模板
+
+**每次调度 dev 时使用以下模板**（确保不遗漏提交流程提醒）：
+
+```markdown
+@agent-dev
+
+任务：TASK-XXX（user-op-hub-xxx）任务标题
+
+【依赖状态】
+✅ 上游任务已完成
+
+【任务要求】
+（具体任务描述）
+
+【🛑 提交流程（重要！必须遵守）】
+
+1. 完成代码 + 更新 TASK 文档
+2. 标记 beads 状态为 `DOING`
+3. 🛑 停止！不要 commit！
+4. 通知 proj 安排 tech review
+5. 等待 tech review 通过
+6. ✅ review 通过后，执行 Git Commit（引用 TASK-ID）
+7. 标记 beads 状态为 `DONE`
+
+⚠️ 违反流程的后果：代码需要重新 review，可能需要返工
+
+【输出】
+1. 代码实现
+2. 更新 TASK-XXX 文档
+3. 自测验证
+```
+
+---

@@ -1,9 +1,9 @@
 ---
 name: prd
 description: 以 PRD 写手 / 需求工程师视角，把 biz-owner 已选定的 Epic 和 biz-overview 转换为"可实现、可验收、可被测试钉住"的 PRD / Story / Slice Spec；用 UI 证据（可运行最小 HTML 原型/截图/录屏）尽早对齐页面形态与主路径，避免仅凭想象写长文档后再返工。
-version: 0.2.0
+version: 0.3.0
 author: 大铭 <yinwm@outlook.com>
-updated: 2025-01-07
+updated: 2025-01-12
 ---
 
 # PRD / 需求文档技能说明（prd）
@@ -48,14 +48,12 @@ updated: 2025-01-07
 * **典型输入**：`/docs/_project/biz-overview.md`、目标用户/场景、范围约束（必须/可后置）、竞品/参考系统、合规/权限要求（若已知）。
 * **关键判断**：
   * 问题与用户进展：这版到底在解决哪个核心问题/哪个用户进展（而不是功能堆砌）？
-  * 范围与非目标：本期 Must/Should/Could/Won’t 是否写清（尤其是 Won’t）？
+  * 范围与非目标：本期 Must/Should/Could/Won't 是否写清（尤其是 Won't）？
   * 交互模型：选择了哪种交互范式（表单/流程/AI 对话/混合），主路径是否最短？
   * 状态机与边界：关键对象有哪些状态？异常/失败/空数据/重复提交的体验与恢复路径是什么？
   * AI Native 体验（如涉及）：何时自动、何时确认、何时人审；置信度/引用/可解释性如何呈现；降级路径是什么？
   * 验收可测试性：AC 是否可被测试（步骤+期望结果），且覆盖边界与权限？
-  * 需求层可观测性：在 `biz-owner` 已定的业务结果指标/止损信号基础上，定义埋点/日志/报表口径，确保“如何观测与验收”清晰可落地。
   * 信任与合规（体验层）：权限、隐私提示、审计需求是否明确到用户可感知的行为与文案？
-  * 发布策略（需求层）：是否需要灰度/开关/回滚/用户通知等需求约束（不涉及实现细节）？
   * Story 拆分粒度：每个 Story 是否能独立实现与验收，并可被下游拆成 Task？
   * UI 证据是否足以支撑交付：至少能演示主路径与关键状态（空/加载/失败/成功）。
 * **质量门槛（DoD）**：下游只靠 PRD+Story 就能开工；所有不确定点用 `[OPEN]/[TBD]` 明确标出且可追问；ID/路径引用一致。
@@ -71,7 +69,7 @@ prd 技能使用以下模板（详见 `/docs/lib/template-mapping.md`）：
 
 | 模板文件 | 用途 | 输出路径 | 关键章节 |
 |---------|------|---------|---------|
-| `tpl-prd.md` | Epic PRD（v0 探索版、v1 可开发版） | `/docs/{{EPIC_DIR}}/prd/PRD-{{EPIC_ID}}-v{{N}}.md` | 目标与成功标准、范围与非目标、功能需求、UI 证据、需求层可观测性 |
+| `tpl-prd.md` | Epic PRD（v0 探索版、v1 可开发版） | `/docs/{{EPIC_DIR}}/prd/PRD-{{EPIC_ID}}-v{{N}}.md` | 目标与成功标准、范围与非目标、功能需求、UI 证据、业务约束与风险、验收标准 |
 | `tpl-story.md` | 用户故事（厚 STORY） | `/docs/{{EPIC_DIR}}/story/STORY-*.md` | 主路径步骤、状态机、可测试 AC、边界与异常、接口契约草案 |
 | `tpl-slice-spec.md` | 竖切闭环规格（驱动 TASK） | `/docs/{{EPIC_DIR}}/slice/SLICE-{{EPIC_ID}}-*.md` | 竖切说明、闭环定义、包含的 AC 清单 |
 | `tpl-prototype-index.html` | 可运行 HTML 原型（UI 证据） | `/docs/{{EPIC_DIR}}/prototypes/index.html` | 可交互的原型页面 |
@@ -94,12 +92,10 @@ prd 技能使用以下模板（详见 `/docs/lib/template-mapping.md`）：
    - 原型（推荐）：`/docs/{{EPIC_DIR}}/prototypes/index.html`
    - 截图/录屏
    - 关键状态说明（空/加载/失败/成功）
-9. **非功能需求**：性能、权限、合规
-10. **需求层可观测性**：埋点/日志/报表口径
-11. **发布策略**（需求层）：开关/灰度/回滚/用户通知
-12. **AI Native 附录**（可选，仅涉及 AI 时）：交互协议、输出形态、降级策略
-13. **版本验收标准**：Release-level Acceptance
-14. **[OPEN]/[TBD]**：未决项
+9. **业务约束与风险**：用户体验要求、错误处理、权限和隐私、业务约束、业务风险
+10. **验收标准**：可测试的验收标准（AC）
+11. **待确认问题**（[OPEN]）：未决项
+12. **变更记录**：版本历史
 
 **tpl-story.md 内容结构**（厚 STORY，Gate C 硬要求）：
 1. **Story ID / EPIC_ID / EPIC_DIR**
