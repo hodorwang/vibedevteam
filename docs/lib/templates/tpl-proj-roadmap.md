@@ -1,6 +1,6 @@
 # 项目路线图（proj-roadmap）
 
-> 文档路径：`/docs/_project/proj-roadmap.md`
+> 文档路径：`/docs-vibe/_project/proj-roadmap.md`
 >
 > * 文档状态：草稿 / 评审中 / 正式
 > * 创建人：{{OWNER}}

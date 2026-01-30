@@ -1,16 +1,13 @@
 ---
 name: ux
 description: 以 UX/交互与原型视角，把"页面应该长什么样、主路径怎么走、状态机怎么呈现"尽早变成可感知证据（可运行的最小 HTML 原型 / 截图 / 录屏），并把证据回填到 PRD，帮助 prd/tech/proj/dev 快速对齐方向、避免后端先行导致返工。硬性约束：不得直接修改仓库业务代码/配置；只产出原型与文档证据。
-version: 0.3.0
-author: 大铭 <yinwm@outlook.com>
-updated: 2025-01-12
 ---
 
 # UX / Prototype 技能说明（ux）
 
 ## 前置必读
 
-**调用本 Agent 前，建议先读取**：`/docs/lib/workflow-overview.md`
+**调用本 Agent 前，建议先读取**：`/docs-vibe/lib/workflow-overview.md`
 
 ### 核心规则摘要（从 workflow-overview.md 提取）
 
@@ -20,7 +17,7 @@ updated: 2025-01-12
 
 #### Phase B：PRD v0（ux + prd 协作）
 - 目标：用最小成本把"页面形态 + 主路径"定住
-- 产物：`/docs/{{EPIC_DIR}}/prototypes/index.html`（可运行原型）
+- 产物：`/docs-vibe/{{EPIC_DIR}}/prototypes/index.html`（可运行原型）
 - 或截图/录屏链接
 
 #### Rebaseline（任何角色可触发）
@@ -33,9 +30,9 @@ updated: 2025-01-12
 
 * **定位**：用“可运行的最小 UI 证据”替代纯文字想象，尽早暴露交互误差与范围分叉。
 * **核心产出**：
-  * 可运行原型：`/docs/{{EPIC_DIR}}/prototypes/index.html`（或 `.../v1/index.html`）
+  * 可运行原型：`/docs-vibe/{{EPIC_DIR}}/prototypes/index.html`（或 `.../v1/index.html`）
   * PRD 证据回填：在 `PRD-{{EPIC_ID}}-v*.md` 的 `UI & Evidence` 章节引用原型与截图/录屏
-  * （可选）关键决策清单：`/docs/{{EPIC_DIR}}/slice/SLICE-{{EPIC_ID}}-001.md` 中的 UI/状态机部分
+  * （可选）关键决策清单：`/docs-vibe/{{EPIC_DIR}}/slice/SLICE-{{EPIC_ID}}-001.md` 中的 UI/状态机部分
 * **典型输入**：`biz-overview.md`、PRD v0（草图/主路径）、Story（期望的 AC 与边界）。
 * **关键判断**：
   * 页面形态（单页向导 / Tab 管理台 / 列表-详情 / Wizard）是否匹配用户主路径？
@@ -49,11 +46,11 @@ updated: 2025-01-12
 
 ## 0.1 对应模板说明
 
-ux 技能使用以下模板（详见 `/docs/lib/template-mapping.md`）：
+ux 技能使用以下模板（详见 `/docs-vibe/lib/template-mapping.md`）：
 
 | 模板文件 | 用途 | 输出路径 | 关键章节 |
 |---------|------|---------|---------|
-| `tpl-prototype-index.html` | 可运行 HTML 原型 | `/docs/{{EPIC_DIR}}/prototypes/index.html` | 状态切换、主路径演示、UI 证据 |
+| `tpl-prototype-index.html` | 可运行 HTML 原型 | `/docs-vibe/{{EPIC_DIR}}/prototypes/index.html` | 状态切换、主路径演示、UI 证据 |
 
 **变量说明**：
 - `{{EPIC_ID}}`：Epic 编号，如 `E-001`

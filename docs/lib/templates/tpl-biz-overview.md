@@ -1,6 +1,6 @@
 # 业务概览（biz-overview）
 
-> 文档路径：`/docs/_project/biz-overview.md`
+> 文档路径：`/docs-vibe/_project/biz-overview.md`
 >
 > * 文档状态：草稿 / 评审中 / 正式
 > * 创建人：{{OWNER}}

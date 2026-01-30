@@ -1,6 +1,6 @@
 # {{TASK_ID}}: {{TASK_TITLE}}
 
-> 文档路径：`/docs/{{EPIC_DIR}}/task/{{TASK_ID}}-{{TASK_TITLE}}.md`
+> 文档路径：`/docs-vibe/{{EPIC_DIR}}/task/{{TASK_ID}}-{{TASK_TITLE}}.md`
 > 任务ID：{{TASK_ID}}
 > Beads 任务ID：`{{BEADS_ID}}`（必填）
 > 任务标题：{{TASK_TITLE}}

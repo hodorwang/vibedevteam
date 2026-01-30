@@ -1,6 +1,6 @@
 # {{EPIC_NAME}} PRD - {{VERSION}}（{{EPIC_ID}}）
 
-> 文档路径：`/docs/{{EPIC_DIR}}/prd/PRD-{{EPIC_ID}}-{{VERSION}}.md`
+> 文档路径：`/docs-vibe/{{EPIC_DIR}}/prd/PRD-{{EPIC_ID}}-{{VERSION}}.md`
 >
 > * EPIC_ID：{{EPIC_ID}}
 > * EPIC_DIR：`{{EPIC_DIR}}`
@@ -14,7 +14,7 @@
 
 ## 0. 关联信息（References）
 
-* biz-overview：`/docs/_project/biz-overview.md`
+* biz-overview：`/docs-vibe/_project/biz-overview.md`
 * Story：`../story/STORY-*.md`
 * Tech Design：`../tech/TECH-{{EPIC_ID}}-v1.md`（或 `TECH-*.md`）
 * Proj Plan：`../proj/PROJ-{{EPIC_ID}}-v1.md`
@@ -74,7 +74,7 @@
 > * PRD v0：至少提供一个可运行最小原型或 1 张关键截图/录屏
 > * PRD v1：主路径 + 关键状态必须有证据（空/加载/失败/成功）
 
-* 原型（推荐）：`/docs/{{EPIC_DIR}}/prototypes/index.html`
+* 原型（推荐）：`/docs-vibe/{{EPIC_DIR}}/prototypes/index.html`
 * 截图/录屏（可选）：（粘贴链接或相对路径）
 * 关键状态说明：
   * 空态：

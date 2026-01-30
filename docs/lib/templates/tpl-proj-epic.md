@@ -1,16 +1,16 @@
 # {{EPIC_NAME}} 项目计划 - {{VERSION}}（{{EPIC_ID}}）
 
-> 文档路径：`/docs/{{EPIC_DIR}}/proj/PROJ-{{EPIC_ID}}-{{VERSION}}.md`
+> 文档路径：`/docs-vibe/{{EPIC_DIR}}/proj/PROJ-{{EPIC_ID}}-{{VERSION}}.md`
 >
 > * 文档状态：草稿 / 正式执行版
 > * 版本：{{VERSION}}
 > * Epic ID：{{EPIC_ID}}
-> * Epic 目录：`/docs/{{EPIC_DIR}}/`
+> * Epic 目录：`/docs-vibe/{{EPIC_DIR}}/`
 > * 项目经理：{{OWNER}}
 > * 创建日期：{{YYYY-MM-DD}}
 > * 更新日期：{{YYYY-MM-DD}}
 > * 关联文档：
->   * biz：`/docs/_project/biz-overview.md`
+>   * biz：`/docs-vibe/_project/biz-overview.md`
 >   * prd：`../prd/PRD-{{EPIC_ID}}-v1.md`
 >   * story：`../story/`
 >   * tech：`../tech/TECH-{{EPIC_ID}}-v1.md`

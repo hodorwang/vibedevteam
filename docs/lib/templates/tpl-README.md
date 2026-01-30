@@ -7,7 +7,7 @@
 * `biz-owner` → `biz-overview.md`（模板文件：`tpl-biz-overview.md`）
 * `prd` → `tpl-prd.md`、`tpl-story.md`
 * `prd/tech` → `tpl-slice-spec.md`
-* `ux` → `tpl-prototype-index.html`（原型 HTML 模板，建议复制到 `docs/{{EPIC_DIR}}/prototypes/index.html`）
+* `ux` → `tpl-prototype-index.html`（原型 HTML 模板，建议复制到 `docs-vibe/{{EPIC_DIR}}/prototypes/index.html`）
 * `tech` → `tpl-tech-epic.md`
 * `tech`（只读评审提示）→ `tpl-code-review-tech.md`
 * `dev` → `tpl-task.md`

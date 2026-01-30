@@ -1,6 +1,6 @@
 # STORY-E-000-001 Demo: 浏览示例 Epic
 
-> 文档路径：`/docs/E-000-Agent-Workflow-Demo/story/STORY-E-000-001-demo.md`
+> 文档路径：`/docs-vibe/E-000-Agent-Workflow-Demo/story/STORY-E-000-001-demo.md`
 
 * EPIC_ID：E-000
 * EPIC_DIR：`E-000-Agent-Workflow-Demo`
@@ -82,7 +82,7 @@
 
 ## 4.3 UI 证据（Evidence）（推荐）
 
-* 原型：`/docs/E-000-Agent-Workflow-Demo/prototypes/index.html`
+* 原型：`/docs-vibe/E-000-Agent-Workflow-Demo/prototypes/index.html`
 
 ---
 

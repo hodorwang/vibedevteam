@@ -8,7 +8,7 @@
 > 3) **TDD/Gate/Rebaseline** 机制写进 `PROJ`，把"能不能开工/能不能 DONE"制度化。
 
 **相关文档**：
-- 模板映射表：`/docs/lib/template-mapping.md`（各 Agent 使用的模板及对应关系）
+- 模板映射表：`/docs-vibe/lib/template-mapping.md`（各 Agent 使用的模板及对应关系）
 - 各 Agent 配置：`.claude/agents/*.md`（详见各 Agent 的 `## 0.1 对应模板说明`）
 
 ---
@@ -17,7 +17,7 @@
 
 * `biz-owner`：定方向与边界（In/Out、MVP、止损信号、成功指标）。
 * `prd`：产出 PRD v0/v1、厚 STORY、（推荐）SLICE；在 PRD 中固化 UI 证据与可测试 AC。
-* `ux`（可选但推荐）：做可运行最小原型（`/docs/{{EPIC_DIR}}/prototypes/...`），把“页面长什么样”变成证据回填 PRD。
+* `ux`（可选但推荐）：做可运行最小原型（`/docs-vibe/{{EPIC_DIR}}/prototypes/...`），把“页面长什么样”变成证据回填 PRD。
 * `tech`：基于厚 STORY/SLICE 输出最小可落地方案与 trade-off；不在缺少输入时输出可执行 TASK 清单。
 * `proj`：写 Gate 与 Rebaseline；决定本期纳入清单与里程碑；用 Gate 控制“能不能进入实现/能不能 DONE”。
 * `dev`：唯一允许改代码/配置；以 TDD/契约优先交付并回写证据。
@@ -27,7 +27,7 @@
 ## 2. 文档地图（新增 Slice / Prototypes）
 
 ```text
-/docs
+/docs-vibe
   /lib/                         # 可复用基础设施（可迁移到新项目）
     workflow-overview.md         # 工作流规范（本文档）
     template-mapping.md          # 模板映射表（Agent ↔ Template）
@@ -67,7 +67,7 @@
 ```
 
 **模板映射说明**：
-- 各 Agent 使用哪些模板，详见 `/docs/lib/template-mapping.md`
+- 各 Agent 使用哪些模板，详见 `/docs-vibe/lib/template-mapping.md`
 - 每个 Agent 配置文件（`.claude/agents/*.md`）的 `## 0.1 对应模板说明` 章节也有详细说明
 
 ---
@@ -77,7 +77,7 @@
 ### Phase A：方向对齐（biz-owner）
 
 产物：
-* `/docs/_project/biz-overview.md`（允许大量 `[OPEN]`）
+* `/docs-vibe/_project/biz-overview.md`（允许大量 `[OPEN]`）
 * 明确本 Epic 的 In/Out、MVP、止损信号
 
 Gate A（进入 PRD v0 前必须满足）：
@@ -90,7 +90,7 @@ Gate A（进入 PRD v0 前必须满足）：
 产物：
 * `PRD-{{EPIC_ID}}-v0.md`（短：主路径 + 关键状态 + 分叉点 + `[OPEN]`）
 * UI 证据入口：
-  * 推荐：`/docs/{{EPIC_DIR}}/prototypes/index.html`
+  * 推荐：`/docs-vibe/{{EPIC_DIR}}/prototypes/index.html`
   * 或截图/录屏链接
 
 Gate B（进入实现前必须满足）：
@@ -270,6 +270,6 @@ proj 必须在 `PROJ-*.md` 维护一张对齐表（本期纳入清单的“硬�
 
 * 新建 Epic 时先创建：
   * `PRD-{{EPIC_ID}}-v0.md`
-  * `docs/{{EPIC_DIR}}/prototypes/index.html`（可选但推荐）
+  * `docs-vibe/{{EPIC_DIR}}/prototypes/index.html`（可选但推荐）
   * `SLICE-{{EPIC_ID}}-001.md`
 * 先做 SLICE-001 的闭环 P0，再迭代增强。

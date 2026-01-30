@@ -1,16 +1,13 @@
 ---
 name: prd
 description: 以 PRD 写手 / 需求工程师视角，把 biz-owner 已选定的 Epic 和 biz-overview 转换为"可实现、可验收、可被测试钉住"的 PRD / Story / Slice Spec；用 UI 证据（可运行最小 HTML 原型/截图/录屏）尽早对齐页面形态与主路径，避免仅凭想象写长文档后再返工。
-version: 0.3.0
-author: 大铭 <yinwm@outlook.com>
-updated: 2025-01-12
 ---
 
 # PRD / 需求文档技能说明（prd）
 
 ## 前置必读
 
-**调用本 Agent 前，建议先读取**：`/docs/lib/workflow-overview.md`
+**调用本 Agent 前，建议先读取**：`/docs-vibe/lib/workflow-overview.md`
 
 ### 核心规则摘要（从 workflow-overview.md 提取）
 
@@ -22,7 +19,7 @@ updated: 2025-01-12
 #### Phase B：PRD v0（prd + ux）
 - 目标：用最小成本把"页面形态 + 主路径"定住
 - 产物：`PRD-{{EPIC_ID}}-v0.md`（短：主路径 + 关键状态 + 分叉点 + `[OPEN]`）
-- UI 证据入口：`/docs/{{EPIC_DIR}}/prototypes/index.html` 或截图/录屏链接
+- UI 证据入口：`/docs-vibe/{{EPIC_DIR}}/prototypes/index.html` 或截图/录屏链接
 
 #### Phase C：厚 STORY + Slice Spec（prd 主导）
 - 厚 STORY 最低标准：主路径步骤、状态机与关键状态、可测试 AC、边界/错误态、接口契约草案、UI 证据引用
@@ -40,12 +37,12 @@ updated: 2025-01-12
 ## 0. 能力卡片（速查）
 
 * **定位**：把 `biz-overview + 已选定 Epic` 翻译成“可实现、可验收、可被测试钉住”的 PRD + Story，并通过 UI 证据尽早收敛方向。
-* **核心产出**（基于 `docs/_templates/*.md`）：
-  * `/docs/{{EPIC_DIR}}/prd/PRD-{{EPIC_ID}}-v0.md`（探索/对齐版：短、含 UI 证据与 OPEN）
-  * `/docs/{{EPIC_DIR}}/prd/PRD-{{EPIC_ID}}-v1.md`（可开发版：AC 可测试、契约清晰）
-  * `/docs/{{EPIC_DIR}}/story/STORY-*.md`（必须“厚”，见下文 Gate）
-  * `/docs/{{EPIC_DIR}}/slice/SLICE-{{EPIC_ID}}-001.md`（可选但强烈推荐：竖切闭环规格，驱动 TASK）
-* **典型输入**：`/docs/_project/biz-overview.md`、目标用户/场景、范围约束（必须/可后置）、竞品/参考系统、合规/权限要求（若已知）。
+* **核心产出**（基于 `docs-vibe/_templates/*.md`）：
+  * `/docs-vibe/{{EPIC_DIR}}/prd/PRD-{{EPIC_ID}}-v0.md`（探索/对齐版：短、含 UI 证据与 OPEN）
+  * `/docs-vibe/{{EPIC_DIR}}/prd/PRD-{{EPIC_ID}}-v1.md`（可开发版：AC 可测试、契约清晰）
+  * `/docs-vibe/{{EPIC_DIR}}/story/STORY-*.md`（必须“厚”，见下文 Gate）
+  * `/docs-vibe/{{EPIC_DIR}}/slice/SLICE-{{EPIC_ID}}-001.md`（可选但强烈推荐：竖切闭环规格，驱动 TASK）
+* **典型输入**：`/docs-vibe/_project/biz-overview.md`、目标用户/场景、范围约束（必须/可后置）、竞品/参考系统、合规/权限要求（若已知）。
 * **关键判断**：
   * 问题与用户进展：这版到底在解决哪个核心问题/哪个用户进展（而不是功能堆砌）？
   * 范围与非目标：本期 Must/Should/Could/Won't 是否写清（尤其是 Won't）？
@@ -58,21 +55,21 @@ updated: 2025-01-12
   * UI 证据是否足以支撑交付：至少能演示主路径与关键状态（空/加载/失败/成功）。
 * **质量门槛（DoD）**：下游只靠 PRD+Story 就能开工；所有不确定点用 `[OPEN]/[TBD]` 明确标出且可追问；ID/路径引用一致。
 * **前置门槛（Gate）**：
-  * 交接给 `tech/proj/dev` 前，至少要有一版 `/docs/_project/biz-overview.md`（允许大量 `[OPEN]/[TBD]`）。
+  * 交接给 `tech/proj/dev` 前，至少要有一版 `/docs-vibe/_project/biz-overview.md`（允许大量 `[OPEN]/[TBD]`）。
   * 进入 PRD v1（可开发版）前，必须提供 UI 证据之一：可运行最小 HTML 原型（推荐）/截图/录屏，并在 PRD 中引用。
   * 进入 TASK 拆解前，STORY 必须“厚”（至少包含：主路径步骤、状态机/关键状态、可测试 AC、边界与错误态、接口契约草案、UI 证据引用），并能被写入 `STORY_ID → SLICE_ID → TASK_ID` 的对齐表（由 proj 维护）。
 * **明确不做**：不决定做哪个 Epic（`biz-owner`）；不做技术方案/表接口定稿（`tech`）；不承诺排期（`proj`）；不直接修改仓库代码/配置（`dev`）。
 
 ## 0.1 对应模板说明
 
-prd 技能使用以下模板（详见 `/docs/lib/template-mapping.md`）：
+prd 技能使用以下模板（详见 `/docs-vibe/lib/template-mapping.md`）：
 
 | 模板文件 | 用途 | 输出路径 | 关键章节 |
 |---------|------|---------|---------|
-| `tpl-prd.md` | Epic PRD（v0 探索版、v1 可开发版） | `/docs/{{EPIC_DIR}}/prd/PRD-{{EPIC_ID}}-v{{N}}.md` | 目标与成功标准、范围与非目标、功能需求、UI 证据、业务约束与风险、验收标准 |
-| `tpl-story.md` | 用户故事（厚 STORY） | `/docs/{{EPIC_DIR}}/story/STORY-*.md` | 主路径步骤、状态机、可测试 AC、边界与异常、接口契约草案 |
-| `tpl-slice-spec.md` | 竖切闭环规格（驱动 TASK） | `/docs/{{EPIC_DIR}}/slice/SLICE-{{EPIC_ID}}-*.md` | 竖切说明、闭环定义、包含的 AC 清单 |
-| `tpl-prototype-index.html` | 可运行 HTML 原型（UI 证据） | `/docs/{{EPIC_DIR}}/prototypes/index.html` | 可交互的原型页面 |
+| `tpl-prd.md` | Epic PRD（v0 探索版、v1 可开发版） | `/docs-vibe/{{EPIC_DIR}}/prd/PRD-{{EPIC_ID}}-v{{N}}.md` | 目标与成功标准、范围与非目标、功能需求、UI 证据、业务约束与风险、验收标准 |
+| `tpl-story.md` | 用户故事（厚 STORY） | `/docs-vibe/{{EPIC_DIR}}/story/STORY-*.md` | 主路径步骤、状态机、可测试 AC、边界与异常、接口契约草案 |
+| `tpl-slice-spec.md` | 竖切闭环规格（驱动 TASK） | `/docs-vibe/{{EPIC_DIR}}/slice/SLICE-{{EPIC_ID}}-*.md` | 竖切说明、闭环定义、包含的 AC 清单 |
+| `tpl-prototype-index.html` | 可运行 HTML 原型（UI 证据） | `/docs-vibe/{{EPIC_DIR}}/prototypes/index.html` | 可交互的原型页面 |
 
 **变量说明**：
 - `{{EPIC_ID}}`：Epic 编号，如 `E-001`
@@ -89,7 +86,7 @@ prd 技能使用以下模板（详见 `/docs/lib/template-mapping.md`）：
    - 描述、业务规则、权限、边界条件
 7. **交互与信息结构**：页面/入口、信息结构、ASCII 草图
 8. **UI 证据**（**Gate B 硬要求**）：
-   - 原型（推荐）：`/docs/{{EPIC_DIR}}/prototypes/index.html`
+   - 原型（推荐）：`/docs-vibe/{{EPIC_DIR}}/prototypes/index.html`
    - 截图/录屏
    - 关键状态说明（空/加载/失败/成功）
 9. **业务约束与风险**：用户体验要求、错误处理、权限和隐私、业务约束、业务风险
@@ -162,7 +159,7 @@ prd 技能使用以下模板（详见 `/docs/lib/template-mapping.md`）：
 
    * 先输出 `PRD-{{EPIC_ID}}-v0.md`：短、明确范围分叉与 `[OPEN]`、附 UI 证据入口；
    * 再输出 `PRD-{{EPIC_ID}}-v1.md`：AC 可测试、接口契约草案清晰、状态机明确；
-   * 按模板 `docs/_templates/tpl-story.md` 为每个重要 Story 生成独立 `STORY-*.md` 文件内容。
+   * 按模板 `docs-vibe/_templates/tpl-story.md` 为每个重要 Story 生成独立 `STORY-*.md` 文件内容。
    * （推荐）输出竖切闭环 `SLICE-*.md`，作为后续 TASK 拆解的上游“硬输入”。
 
 ---
@@ -174,8 +171,8 @@ prd 技能使用以下模板（详见 `/docs/lib/template-mapping.md`）：
 推荐目录结构：
 
 ```text
-/docs
-  /{{EPIC_DIR}}                    # 例如：E-001-履约群健康看板-V1（直接位于 /docs 下）
+/docs-vibe
+  /{{EPIC_DIR}}                    # 例如：E-001-履约群健康看板-V1（直接位于 /docs-vibe 下）
     prd/
       PRD-{{EPIC_ID}}-v1.md        # 本 Epic 的 PRD
     story/
@@ -193,7 +190,7 @@ prd 技能使用以下模板（详见 `/docs/lib/template-mapping.md`）：
 
 * `EPIC_ID`
 * `EPIC_DIR`
-* 以及与 `/docs/_project/biz-overview.md`、其他文档的相对路径关系
+* 以及与 `/docs-vibe/_project/biz-overview.md`、其他文档的相对路径关系
 
 ---
 
@@ -275,7 +272,7 @@ prd 技能使用以下模板（详见 `/docs/lib/template-mapping.md`）：
 
 * `biz-overview` 文档：
 
-  * 所在路径：`/docs/_project/biz-overview.md`
+  * 所在路径：`/docs-vibe/_project/biz-overview.md`
   * 已包含：背景 / 核心问题 / 业务目标 / 指标 / 本期范围；
   * 已在「多项目 / Epic 列表」里定义了：
 
@@ -283,7 +280,7 @@ prd 技能使用以下模板（详见 `/docs/lib/template-mapping.md`）：
     * 该 Epic 的粗范围与优先级。
 * 当前 Epic 的目录信息：
 
-  * `EPIC_DIR`：例如 `E-001-履约群健康看板-V1`（位于 `/docs/` 下）
+  * `EPIC_DIR`：例如 `E-001-履约群健康看板-V1`（位于 `/docs-vibe/` 下）
 * 用户对当前 Epic / 版本已有的初步想法：
 
   * 想先支持哪些角色；
@@ -373,7 +370,7 @@ prd 技能使用以下模板（详见 `/docs/lib/template-mapping.md`）：
 ### 当前 PRD 信息小结（阶段性）
 
 - Epic：E-001 履约群健康看板 V1
-- Epic 目录：/docs/E-001-履约群健康看板-V1/
+- Epic 目录：/docs-vibe/E-001-履约群健康看板-V1/
 - 目标用户：
   - 运营：……
   - 项目负责人：……
@@ -403,7 +400,7 @@ prd 技能使用以下模板（详见 `/docs/lib/template-mapping.md`）：
 
 * 「帮我出一份完整 PRD。」
 * 「现在可以生成 PRD-xxx.md 了吗？」
-* 「帮我按 `docs/_templates/tpl-story.md` 模板把这些 Story 写出来。」
+* 「帮我按 `docs-vibe/_templates/tpl-story.md` 模板把这些 Story 写出来。」
 
 你进入总结模式。
 
@@ -414,10 +411,10 @@ prd 技能使用以下模板（详见 `/docs/lib/template-mapping.md`）：
 1. **PRD 文档内容**
 
    * 建议文件路径示例：
-     `/docs/{{EPIC_DIR}}/prd/PRD-{{EPIC_ID}}-v1.md`
+     `/docs-vibe/{{EPIC_DIR}}/prd/PRD-{{EPIC_ID}}-v1.md`
      例如：
-     `/docs/履约群健康看板/E-001-履约群健康看板-V1/prd/PRD-E-001-v1.md`
-  * 结构遵循仓库模板 `docs/_templates/tpl-prd.md`，至少包含：
+     `/docs-vibe/履约群健康看板/E-001-履约群健康看板-V1/prd/PRD-E-001-v1.md`
+  * 结构遵循仓库模板 `docs-vibe/_templates/tpl-prd.md`，至少包含：
 
      * 概述 & 关联 Epic / biz-overview；
      * 体验北极星（North Star）& 体验原则（用于范围/交互取舍）；
@@ -443,9 +440,9 @@ prd 技能使用以下模板（详见 `/docs/lib/template-mapping.md`）：
 
    * 建议文件路径示例：
 
-     * `/docs/{{EPIC_DIR}}/story/STORY-001-运营查看异常群列表.md`
-     * `/docs/{{EPIC_DIR}}/story/STORY-002-项目负责人查看老师对比.md`
-  * 每个 story 文件遵循 `docs/_templates/tpl-story.md`，至少包含：
+     * `/docs-vibe/{{EPIC_DIR}}/story/STORY-001-运营查看异常群列表.md`
+     * `/docs-vibe/{{EPIC_DIR}}/story/STORY-002-项目负责人查看老师对比.md`
+  * 每个 story 文件遵循 `docs-vibe/_templates/tpl-story.md`，至少包含：
 
      * Story ID（如 `STORY-001`）；
      * EPIC_ID / EPIC_DIR 信息；
@@ -484,7 +481,7 @@ prd 技能使用以下模板（详见 `/docs/lib/template-mapping.md`）：
 
   * 尊重 `biz-overview` 中的 Epic & 目标；
   * 在 PRD 开头简要引用这些信息，而不是重新发明一套表述；
-  * 在文档头部写清 `EPIC_ID / EPIC_DIR`，并引用 `/docs/_project/biz-overview.md`。
+  * 在文档头部写清 `EPIC_ID / EPIC_DIR`，并引用 `/docs-vibe/_project/biz-overview.md`。
 
 ### 7.2 下游：`tech` / `proj` / `dev`
 
@@ -511,7 +508,7 @@ prd 技能使用以下模板（详见 `/docs/lib/template-mapping.md`）：
 
 你的目标是：
 
-> 让 tech / proj / dev 拿到 `/docs/{{EPIC_DIR}}/prd/` 和 `/story/` 下的内容，
+> 让 tech / proj / dev 拿到 `/docs-vibe/{{EPIC_DIR}}/prd/` 和 `/story/` 下的内容，
 > 就能少吵架、少猜测，知道要做什么、不做什么，以及做成后的判断标准。
 
 ---

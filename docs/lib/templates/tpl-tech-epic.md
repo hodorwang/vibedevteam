@@ -1,7 +1,7 @@
 # TECH Epic Template（TECH-{{EPIC_ID}}-v{{N}}）
 
 > 建议文件路径：
-> `/docs/{{EPIC_DIR}}/tech/TECH-{{EPIC_ID}}-v{{N}}.md`
+> `/docs-vibe/{{EPIC_DIR}}/tech/TECH-{{EPIC_ID}}-v{{N}}.md`
 >
 > 目标：把 “PRD/Story 里要做什么” 翻译成 “在现有代码基线下怎么做”，并且显式写出「复用点/改动点/迁移与上线策略/风险与任务拆解」。
 
@@ -15,10 +15,10 @@
 - 状态：`DRAFT | REVIEW | FINAL`
 - 作者：`{{OWNER}}`
 - 关联文档：
-  - biz：`/docs/_project/biz-overview.md`
+  - biz：`/docs-vibe/_project/biz-overview.md`
   - prd：`../prd/PRD-{{EPIC_ID}}-v{{N}}.md`
   - story：`../story/`（列出本期纳入的 Story）
-  - project baseline：`/docs/_project/`（列出你依赖的基线/规范/ADR）
+  - project baseline：`/docs-vibe/_project/`（列出你依赖的基线/规范/ADR）
 
 ---
 
@@ -106,7 +106,7 @@ flowchart LR
 > - 边界情况（空数据、权限不足等）
 > - 类型定义（根据项目技术栈选择：TypeScript/Go/Java 等）
 >
-> **契约格式参考**：`/docs/_project/conventions/api-conventions.md`（如有）
+> **契约格式参考**：`/docs-vibe/_project/conventions/api-conventions.md`（如有）
 >
 > **禁止使用 mock 数据**：接口契约必须基于真实数据结构，不能用假数据。
 

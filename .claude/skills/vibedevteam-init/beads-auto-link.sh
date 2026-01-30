@@ -6,7 +6,7 @@
 # 功能：批量创建 beads 任务并自动关联 TASK 文档
 #
 # 示例：
-#   ./scripts/beads-auto-link.sh E-014 docs/E-014-私聊聊天记录功能/task
+#   ./scripts/beads-auto-link.sh E-014 docs-vibe/E-014-私聊聊天记录功能/task
 #
 # E014 复盘：15 个 TASK × 4 次操作 = 60 次手动命令 → 使用此脚本减少到 1 次
 
@@ -19,7 +19,7 @@ if [ -z "$EPIC_ID" ] || [ -z "$TASK_DIR" ]; then
   echo "用法: $0 <EPIC_ID> <TASK_DIR>"
   echo ""
   echo "示例:"
-  echo "  $0 E-014 docs/E-014-私聊聊天记录功能/task"
+  echo "  $0 E-014 docs-vibe/E-014-私聊聊天记录功能/task"
   exit 1
 fi
 

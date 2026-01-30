@@ -20,7 +20,7 @@ version: 0.3.0
 
 1. **确认参数**
    - EPIC_ID
-   - 输出文件路径（可选，默认 docs/{EPIC_ID}-dependencies.svg）
+   - 输出文件路径（可选，默认 docs-vibe/{EPIC_ID}-dependencies.svg）
 
 2. **验证 Graphviz**
    ```bash

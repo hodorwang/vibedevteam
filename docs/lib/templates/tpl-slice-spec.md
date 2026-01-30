@@ -1,6 +1,6 @@
 # SLICE 竖切规格 - {{SLICE_ID}}（{{EPIC_ID}}）
 
-> 文档路径：`/docs/{{EPIC_DIR}}/slice/{{SLICE_ID}}.md`
+> 文档路径：`/docs-vibe/{{EPIC_DIR}}/slice/{{SLICE_ID}}.md`
 >
 > 目的：把“一个可用闭环”定义清楚，作为 TECH/TASK 的硬输入，避免凭想象拆任务。
 
@@ -15,12 +15,12 @@
 
 ## 0. References
 
-* biz-overview：`/docs/_project/biz-overview.md`
+* biz-overview：`/docs-vibe/_project/biz-overview.md`
 * PRD：`../prd/PRD-{{EPIC_ID}}-v1.md`
 * Story：`../story/STORY-*.md`
 * TECH：`../tech/TECH-{{EPIC_ID}}-v1.md`
 * UI 证据（推荐）：
-  * 原型：`/docs/{{EPIC_DIR}}/prototypes/index.html`
+  * 原型：`/docs-vibe/{{EPIC_DIR}}/prototypes/index.html`
   * 或截图/录屏链接：
 
 ---

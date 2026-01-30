@@ -1,11 +1,11 @@
 # Agent Workflow Demo 项目计划 - v1（E-000）
 
-> 文档路径：`/docs/E-000-Agent-Workflow-Demo/proj/PROJ-E-000-v1.md`
+> 文档路径：`/docs-vibe/E-000-Agent-Workflow-Demo/proj/PROJ-E-000-v1.md`
 >
 > * 文档状态：草稿
 > * 版本：v1
 > * Epic ID：E-000
-> * Epic 目录：`/docs/E-000-Agent-Workflow-Demo/`
+> * Epic 目录：`/docs-vibe/E-000-Agent-Workflow-Demo/`
 > * 项目经理：@demo
 > * 创建日期：2024-01-01
 > * 更新日期：2024-01-01

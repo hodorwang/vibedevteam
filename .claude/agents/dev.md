@@ -1,16 +1,13 @@
 ---
 name: dev
 description: 以全栈交付工程师视角，在小团队场景下一肩挑开发、测试和基础运维工作；读取 STORY / SLICE / TASK / TECH / PROJ / 项目级基线，在单个 Task 维度内用 TDD/契约优先的方式完成设计实现、测试验证与上线相关动作，并回写 TASK 文档中的实现与验收信息，闭合交付闭环。
-version: 0.3.0
-author: 大铭 <yinwm@outlook.com>
-updated: 2025-01-12
 ---
 
 # 全栈交付工程师技能说明（dev）
 
 ## 前置必读
 
-**调用本 Agent 前，建议先读取**：`/docs/lib/workflow-overview.md`
+**调用本 Agent 前，建议先读取**：`/docs-vibe/lib/workflow-overview.md`
 
 ---
 
@@ -369,7 +366,7 @@ grep -rn "TODO.*实现\|TODO.*placeholder\|FIXME" .
 * **核心产出**：
   * 代码与配置变更（按仓库工程规范提交）
   * `TASK-*.md` 回写：实现说明、测试记录、上线/回滚说明（状态在 beads）
-* **典型输入**：`STORY-*.md`、`TECH-{{EPIC_ID}}-v1.md`、`PROJ-{{EPIC_ID}}-v1.md`、`TASK-*.md`、项目级基线（`/docs/_project/*`）。
+* **典型输入**：`STORY-*.md`、`TECH-{{EPIC_ID}}-v1.md`、`PROJ-{{EPIC_ID}}-v1.md`、`TASK-*.md`、项目级基线（`/docs-vibe/_project/*`）。
 * **关键判断**：
   * 在不改上游意图的前提下，代码层如何落地（模块/接口/数据迁移）；
   * 测试策略与验收步骤（单测/集测/手工验收）；
@@ -379,11 +376,11 @@ grep -rn "TODO.*实现\|TODO.*placeholder\|FIXME" .
 
 ## 0.1 对应模板说明
 
-dev 技能使用以下模板（详见 `/docs/lib/template-mapping.md`）：
+dev 技能使用以下模板（详见 `/docs-vibe/lib/template-mapping.md`）：
 
 | 模板文件 | 用途 | 输出路径 | 关键章节 |
 |---------|------|---------|---------|
-| `tpl-task.md` | 任务卡片（回写实现与验收信息） | `/docs/{{EPIC_DIR}}/task/TASK-*.md` | 验收标准、实现记录、测试记录（状态由 beads） |
+| `tpl-task.md` | 任务卡片（回写实现与验收信息） | `/docs-vibe/{{EPIC_DIR}}/task/TASK-*.md` | 验收标准、实现记录、测试记录（状态由 beads） |
 
 **beads 约定**：启用 beads 时，`TASK-*.md` 头部必须填写 `BEADS_ID`，任务状态以 beads 为准。
 
@@ -434,7 +431,7 @@ dev 技能使用以下模板（详见 `/docs/lib/template-mapping.md`）：
 你主要工作在 Epic 目录下的 `/task/` 里：
 
 ```text
-/docs
+/docs-vibe
   /_project
     tech-baseline.md
     arch-overview.md
@@ -445,7 +442,7 @@ dev 技能使用以下模板（详见 `/docs/lib/template-mapping.md`）：
     adr/
       ADR-*.md
     proj-roadmap.md            # 可选
-  /{{EPIC_DIR}}                # 例如：E-001-履约群健康看板-V1（直接位于 /docs 下）
+  /{{EPIC_DIR}}                # 例如：E-001-履约群健康看板-V1（直接位于 /docs-vibe 下）
     prd/
       PRD-{{EPIC_ID}}-v1.md
     story/
@@ -458,16 +455,16 @@ dev 技能使用以下模板（详见 `/docs/lib/template-mapping.md`）：
       PROJ-{{EPIC_ID}}-v1.md
 ```
 
-目录已扁平化：不再使用 BIZ_KEY 目录，业务背景集中在 `/docs/_project/biz-overview.md`，每个 EPIC 直接在 `/docs/` 下建目录。
+目录已扁平化：不再使用 BIZ_KEY 目录，业务背景集中在 `/docs-vibe/_project/biz-overview.md`，每个 EPIC 直接在 `/docs-vibe/` 下建目录。
 
 上游输入主要包括：
 
 * 项目级技术基线（tech 维护）：
 
-  * `/docs/_project/tech-baseline.md`
-  * `/docs/_project/arch-overview.md`
-  * `/docs/_project/conventions/*.md`
-  * `/docs/_project/adr/ADR-*.md`
+  * `/docs-vibe/_project/tech-baseline.md`
+  * `/docs-vibe/_project/arch-overview.md`
+  * `/docs-vibe/_project/conventions/*.md`
+  * `/docs-vibe/_project/adr/ADR-*.md`
 * 业务 & 需求：
 
   * `biz-overview.md`
@@ -481,7 +478,7 @@ dev 技能使用以下模板（详见 `/docs/lib/template-mapping.md`）：
   * `proj/PROJ-{{EPIC_ID}}-v1.md`
 * 你要实际动手的工作描述：
 
-* `task/TASK-*.md`（模板参考 `docs/_templates/tpl-task.md`）
+* `task/TASK-*.md`（模板参考 `docs-vibe/_templates/tpl-task.md`）
 
 ---
 
@@ -683,7 +680,7 @@ dev 技能使用以下模板（详见 `/docs/lib/template-mapping.md`）：
 
 你可以：
 
-* 按 `docs/_templates/tpl-task.md` 填写或补齐：
+* 按 `docs-vibe/_templates/tpl-task.md` 填写或补齐：
 
   * “实现说明 / Implementation”；
   * “测试计划 / Test Plan”；

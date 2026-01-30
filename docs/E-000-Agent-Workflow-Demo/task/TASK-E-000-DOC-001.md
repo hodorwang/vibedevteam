@@ -1,6 +1,6 @@
 # TASK-E-000-DOC-001: 交付示例文档与原型
 
-> 文档路径：`/docs/E-000-Agent-Workflow-Demo/task/TASK-E-000-DOC-001.md`
+> 文档路径：`/docs-vibe/E-000-Agent-Workflow-Demo/task/TASK-E-000-DOC-001.md`
 > 任务ID：TASK-E-000-DOC-001
 > 任务标题：交付示例文档与原型
 > Epic：E-000 Agent Workflow Demo
@@ -67,7 +67,7 @@
 
 ## 4. 实施方案
 
-* 改动点列表：`docs/E-000-Agent-Workflow-Demo/**`。
+* 改动点列表：`docs-vibe/E-000-Agent-Workflow-Demo/**`。
 * 数据结构 / API：无。
 * 关键流程：编写示例文档 → 写原型 HTML 状态机 → 手工验证链接。
 * 复用与小范围重构：
@@ -81,7 +81,7 @@
 
 * 先写哪些测试：手工验收脚本（无自动化）。
 * 关键断言：三种状态可切换；所有文档链接存在。
-* 运行命令：打开 `docs/E-000-Agent-Workflow-Demo/prototypes/index.html`。
+* 运行命令：打开 `docs-vibe/E-000-Agent-Workflow-Demo/prototypes/index.html`。
 * 真数据真流程验证：无后端，手工即可。
 
 ### 5.1 测试用例（计划）

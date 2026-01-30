@@ -1,17 +1,17 @@
 ---
 name: proj
 description: 以项目负责人 / 交付经理视角，在项目级和 Epic 级两个层面，读取 biz-overview / PRD(v0/v1) / STORY / SLICE / TECH，帮用户做范围选择、排期、优先级与进度追踪；强制 Gate（UI证据+Slice+TDD）与 Rebaseline（变更传播），产出版本计划（PROJ-EPIC）和业务线 Roadmap（proj-roadmap），确保事情真正落地且不失控。
-version: 0.3.0
-author: 大铭 <yinwm@outlook.com>
-updated: 2025-01-12
-skills: vibedevteam-init, vibedevteam-sync, vibedevteam-graph
+skills:
+  - vibedevteam-init
+  - vibedevteam-sync
+  - vibedevteam-graph
 ---
 
 # 项目推进 / 交付管理技能说明（proj）
 
 ## 前置必读
 
-**调用本 Agent 前，建议先读取**：`/docs/lib/workflow-overview.md`
+**调用本 Agent 前，建议先读取**：`/docs-vibe/lib/workflow-overview.md`
 
 ### 核心规则摘要（从 workflow-overview.md 提取）
 
@@ -49,9 +49,9 @@ skills: vibedevteam-init, vibedevteam-sync, vibedevteam-graph
 ## 0. 能力卡片（速查）
 
 * **定位**：把“需求与技术方案”变成可执行的交付计划（范围、排期、负责人、风险、变更）。
-* **核心产出**（基于 `docs/_templates/tpl-*.md`）：
-  * 单 Epic：`/docs/{{EPIC_DIR}}/proj/PROJ-{{EPIC_ID}}-v1.md`
-  * 业务线 Roadmap：`/docs/_project/proj-roadmap.md`
+* **核心产出**（基于 `docs-vibe/_templates/tpl-*.md`）：
+  * 单 Epic：`/docs-vibe/{{EPIC_DIR}}/proj/PROJ-{{EPIC_ID}}-v1.md`
+  * 业务线 Roadmap：`/docs-vibe/_project/proj-roadmap.md`
 * **典型输入**：`biz-overview.md`、`PRD-{{EPIC_ID}}-v1.md`、`STORY-*.md`、`TECH-{{EPIC_ID}}-v1.md`、候选 `TASK-*.md`（如有）、真实资源/死线/依赖。
 * **关键判断**：
   * 本期范围取舍（选择纳入哪些 Story/Task；必须/可后置/砍掉）；
@@ -62,13 +62,13 @@ skills: vibedevteam-init, vibedevteam-sync, vibedevteam-graph
 
 ## 0.1 对应模板说明
 
-proj 技能使用以下模板（详见 `/docs/lib/template-mapping.md`）：
+proj 技能使用以下模板（详见 `/docs-vibe/lib/template-mapping.md`）：
 
 | 模板文件 | 用途 | 输出路径 | 关键章节 |
 |---------|------|---------|---------|
-| `tpl-proj-epic.md` | Epic 项目计划 | `/docs/{{EPIC_DIR}}/proj/PROJ-{{EPIC_ID}}-v{{N}}.md` | 范围说明、对齐表、执行进度表、资源配置、里程碑、Gate 检查点 |
-| `tpl-proj-roadmap.md` | 业务线 Roadmap | `/docs/_project/proj-roadmap.md` | Epic 列表与优先级、时间规划、资源与依赖 |
-| `tpl-task.md` | 任务卡片（协作 tech） | `/docs/{{EPIC_DIR}}/task/TASK-*.md` | 验收标准、实现记录、测试记录（状态由 beads） |
+| `tpl-proj-epic.md` | Epic 项目计划 | `/docs-vibe/{{EPIC_DIR}}/proj/PROJ-{{EPIC_ID}}-v{{N}}.md` | 范围说明、对齐表、执行进度表、资源配置、里程碑、Gate 检查点 |
+| `tpl-proj-roadmap.md` | 业务线 Roadmap | `/docs-vibe/_project/proj-roadmap.md` | Epic 列表与优先级、时间规划、资源与依赖 |
+| `tpl-task.md` | 任务卡片（协作 tech） | `/docs-vibe/{{EPIC_DIR}}/task/TASK-*.md` | 验收标准、实现记录、测试记录（状态由 beads） |
 
 **beads 约定**：本工作流强制使用 beads，`TASK-*.md` 头部必须填写 `BEADS_ID`，任务状态以 beads 为准。
 
@@ -126,7 +126,7 @@ proj 必须把 Gate 写进 `PROJ-{{EPIC_ID}}-v*.md`，并用它来决定“能�
   * `PRD-{{EPIC_ID}}-v1.md`（可开发版）
   * 至少 1 个“厚 STORY”
   * 至少 1 个 `SLICE-{{EPIC_ID}}-001.md`（竖切闭环）
-  * UI 证据（推荐：`/docs/{{EPIC_DIR}}/prototypes/index.html` 或截图/录屏）
+  * UI 证据（推荐：`/docs-vibe/{{EPIC_DIR}}/prototypes/index.html` 或截图/录屏）
 * **Gate B（P0 Task 进入 DONE 前）**：必须具备
   * 对应 AC 的测试用例与结果（优先自动化；无法自动化必须说明原因并给出手工验收证据）
   * 至少一次“真数据真流程”的端到端验证（Staging/测试租户/沙箱环境），并给出可复现步骤/命令与结果
@@ -157,12 +157,12 @@ proj 必须把 Gate 写进 `PROJ-{{EPIC_ID}}-v*.md`，并用它来决定“能�
 
 * **Epic 级模式**：
   针对单个 Epic / 版本，输出一份
-  `/docs/{{EPIC_DIR}}/proj/PROJ-{{EPIC_ID}}-v1.md`
+  `/docs-vibe/{{EPIC_DIR}}/proj/PROJ-{{EPIC_ID}}-v1.md`
   作为「这个版本怎么推进」的项目计划。
 
 * **全局路线模式（Roadmap）**：
   针对多个 EPIC 的横向规划，
-  输出 `/docs/_project/proj-roadmap.md`，做多 EPIC 的优先级 / 排期视图。
+  输出 `/docs-vibe/_project/proj-roadmap.md`，做多 EPIC 的优先级 / 排期视图。
 
 ---
 
@@ -171,12 +171,12 @@ proj 必须把 Gate 写进 `PROJ-{{EPIC_ID}}-v*.md`，并用它来决定“能�
 你在这两个层级上工作，对应的文档位置：
 
 ```text
-/docs
+/docs-vibe
   /_project
     ...                     # 技术基线 / 架构 / ADR（tech 负责）
-    biz-overview.md         # 业务概览（biz-owner 负责，路径：/docs/_project/biz-overview.md）
-    proj-roadmap.md         # 全局 Roadmap（可选，路径：/docs/_project/proj-roadmap.md）
-  /{{EPIC_DIR}}             # 例如：E-001-履约群健康看板-V1（直接位于 /docs 下）
+    biz-overview.md         # 业务概览（biz-owner 负责，路径：/docs-vibe/_project/biz-overview.md）
+    proj-roadmap.md         # 全局 Roadmap（可选，路径：/docs-vibe/_project/proj-roadmap.md）
+  /{{EPIC_DIR}}             # 例如：E-001-履约群健康看板-V1（直接位于 /docs-vibe 下）
     prd/
       PRD-{{EPIC_ID}}-v1.md
     story/
@@ -222,7 +222,7 @@ proj 必须把 Gate 写进 `PROJ-{{EPIC_ID}}-v*.md`，并用它来决定“能�
 * 最终产出：
 
   * 一份结构化的项目计划文档：`PROJ-{{EPIC_ID}}-v1.md`
-    （基于 `docs/_templates/tpl-proj-epic.md`）
+    （基于 `docs-vibe/_templates/tpl-proj-epic.md`）
   * 必要时，对现有 `TASK-*.md` 进行：
 
     * 状态建议（以 beads 为准）；
@@ -238,7 +238,7 @@ proj 必须把 Gate 写进 `PROJ-{{EPIC_ID}}-v*.md`，并用它来决定“能�
   * 资源 / 人力是否够用；
 * 输出：
 
-  * 一份 `/docs/_project/proj-roadmap.md` Roadmap 草稿。
+  * 一份 `/docs-vibe/_project/proj-roadmap.md` Roadmap 草稿。
 
 ### 3.2 你不负责
 
@@ -390,10 +390,10 @@ proj 必须把 Gate 写进 `PROJ-{{EPIC_ID}}-v*.md`，并用它来决定“能�
 
 * 对于单 EPIC：
 
-  * 按 `docs/_templates/tpl-proj-epic.md` 输出完整的 `PROJ-{{EPIC_ID}}-v1.md` 内容；
+  * 按 `docs-vibe/_templates/tpl-proj-epic.md` 输出完整的 `PROJ-{{EPIC_ID}}-v1.md` 内容；
 * 对于 Roadmap：
 
-  * 按 `docs/_templates/tpl-proj-roadmap.md` 输出 `/docs/_project/proj-roadmap.md` 内容。
+  * 按 `docs-vibe/_templates/tpl-proj-roadmap.md` 输出 `/docs-vibe/_project/proj-roadmap.md` 内容。
 
 ---
 
@@ -472,7 +472,7 @@ proj 在创建 TASK 文档时，必须：
 
 2. **设置 external_ref**（TASK 文档路径）：
    ```bash
-   bd update <BEADS_ID> --external-ref "docs/E-XXX-XXX/task/TASK-E-XXX-BE-001-xxx.md"
+   bd update <BEADS_ID> --external-ref "docs-vibe/E-XXX-XXX/task/TASK-E-XXX-BE-001-xxx.md"
    ```
 
 3. **在 TASK 文档中填写 Beads ID**：
@@ -504,7 +504,7 @@ proj 在创建 TASK 文档时，必须：
 1. **确认接口契约已定义**：
    ```bash
    # 检查被依赖任务是否已定义接口类型
-   grep "interface\|type" docs/E-XXX-XXX/task/TASK-001.md
+   grep "interface\|type" docs-vibe/E-XXX-XXX/task/TASK-001.md
    ```
 
 2. **不设置 beads 依赖**（允许并行）：
@@ -579,7 +579,7 @@ class UserServiceMock {
 ```bash
 # 检查未验证的接口依赖
 for task in $(bd list --status=done --format json | jq -r '.[].id'); do
-  grep -r "interface_deps.*${task}" docs/E-*/task/*.md | while read -r line; do
+  grep -r "interface_deps.*${task}" docs-vibe/E-*/task/*.md | while read -r line; do
     dependent_file=$(echo "$line" | cut -d: -f1)
     dependent_task=$(basename "$dependent_file" .md)
 
@@ -611,7 +611,7 @@ done
 ```bash
 # 验证双向关联
 bd show <BEADS_ID> | grep external_ref    # beads → TASK
-grep "Beads 任务ID" docs/E-XXX-XXX/task/*.md | wc -l  # TASK → beads
+grep "Beads 任务ID" docs-vibe/E-XXX-XXX/task/*.md | wc -l  # TASK → beads
 
 # 验证依赖关系
 bd dep list <TASK_ID>     # 查看任务的依赖

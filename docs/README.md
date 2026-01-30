@@ -110,8 +110,8 @@ bd update $TASK_ID -s "doing"
 
 | 文档 | 用途 |
 |------|------|
-| `docs-vibe/lib/workflow-overview.md` | 工作流规范（Gate 机制、Phase 分工） |
-| `docs-vibe/lib/templates/` | 所有模板（PRD/Story/Slice/Tech/Task/Proj） |
+| `docs/lib/workflow-overview.md` | 工作流规范（Gate 机制、Phase 分工） |
+| `docs/lib/templates/` | 所有模板（PRD/Story/Slice/Tech/Task/Proj） |
 | `.claude/agents/*.md` | 各 Agent 的详细配置 |
 
 ---
@@ -133,7 +133,7 @@ beads 是一个依赖感知的任务跟踪器，专为 AI 工作流设计。
 - **npm**：`npm install -g @beads/bd`
 - **二进制**：从 [GitHub Releases](https://github.com/steveyegge/beads/releases) 下载
 
-详细安装步骤请参考：[beads 官方安装指南](https://github.com/steveyegge/beads/blob/main/docs-vibe/INSTALLING.md)
+详细安装步骤请参考：[beads 官方安装指南](https://github.com/steveyegge/beads/blob/main/docs/INSTALLING.md)
 
 ### 安装步骤
 
@@ -142,7 +142,7 @@ beads 是一个依赖感知的任务跟踪器，专为 AI 工作流设计。
 git clone https://github.com/vibedevteam/vibedevteam.git
 
 # 2. 复制核心内容到你的项目
-cp -r vibedevteam/docs-vibe 你的项目根目录/
+cp -r vibedevteam/docs 你的项目根目录/
 mkdir -p 你的项目根目录/.claude
 cp -r vibedevteam/.claude/agents 你的项目根目录/.claude/
 cp -r vibedevteam/.claude/skills 你的项目根目录/.claude/
@@ -167,7 +167,7 @@ rm -rf vibedevteam
   │       ├── vibedevteam-init/    # 批量创建 beads 任务
   │       ├── vibedevteam-sync/    # 同步状态到 PROJ 文档
   │       └── vibedevteam-graph/   # 生成依赖可视化图
-  └── docs-vibe/
+  └── docs/
       ├── lib/                 # 可复用基础设施
       ├── _project/            # 项目级配置
       └── E-XXX-*/             # Epic 文档
@@ -256,11 +256,11 @@ rm -rf vibedevteam
 prd: 好的，我先问几个问题...
 [多轮对话，澄清需求、边界、主路径]
 
-prd: 我现在创建 docs-vibe/E-001-xxx/ 目录并生成 PRD v0、Story、Slice 文档
+prd: 我现在创建 docs/E-001-xxx/ 目录并生成 PRD v0、Story、Slice 文档
 ```
 
 **检查清单**：
-- [ ] `docs-vibe/E-XXX-*/` 目录已创建
+- [ ] `docs/E-XXX-*/` 目录已创建
 - [ ] PRD v0 有 UI 证据链接
 - [ ] 至少 1 个厚 STORY（主路径/状态机/AC）
 - [ ] 至少 1 份 SLICE-001（闭环定义）
@@ -270,5 +270,5 @@ prd: 我现在创建 docs-vibe/E-001-xxx/ 目录并生成 PRD v0、Story、Slice
 
 ## 贡献规范
 
-- 修改 `docs-vibe/lib/templates/` 时，同步更新 `docs-vibe/lib/template-mapping.md`
-- 新增 Epic 请放到 `docs-vibe/E-XXX-*/`，不要直接改基础模板
+- 修改 `docs/lib/templates/` 时，同步更新 `docs/lib/template-mapping.md`
+- 新增 Epic 请放到 `docs/E-XXX-*/`，不要直接改基础模板

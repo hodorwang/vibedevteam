@@ -10,9 +10,9 @@
    - 每个 Agent 的 `## 0.1 对应模板说明` 章节
    - 确保模板引用、变量说明、内容结构保持一致
 
-2. **`/docs/lib/workflow-overview.md`**
-   - `## 2. 文档地图` 章节：保持 `/docs/lib/` 和 `/docs/lib/templates/` 结构同步
-   - 模板映射说明段落（指向 `/docs/lib/template-mapping.md`）
+2. **`/docs-vibe/lib/workflow-overview.md`**
+   - `## 2. 文档地图` 章节：保持 `/docs-vibe/lib/` 和 `/docs-vibe/lib/templates/` 结构同步
+   - 模板映射说明段落（指向 `/docs-vibe/lib/template-mapping.md`）
 
 **变更检查清单**：
 - [ ] 更新了 `template-mapping.md` 的映射表？
@@ -36,16 +36,16 @@
 
 | Agent | 模板文件 | 输出文档路径 | 用途说明 |
 |-------|---------|-------------|---------|
-| **biz-owner** | `tpl-biz-overview.md` | `/docs/_project/biz-overview.md` | 业务概览（商业模式、目标、Epic 列表） |
-| **prd** | `tpl-prd.md` | `/docs/{{EPIC_DIR}}/prd/PRD-{{EPIC_ID}}-v{{N}}.md` | Epic PRD（v0 探索版、v1 可开发版） |
-| **prd** | `tpl-story.md` | `/docs/{{EPIC_DIR}}/story/STORY-*.md` | 用户故事（厚 Story：主路径/状态机/AC/边界/契约） |
-| **prd** | `tpl-slice-spec.md` | `/docs/{{EPIC_DIR}}/slice/SLICE-{{EPIC_ID}}-*.md` | 竖切闭环规格（驱动 TASK 拆解） |
-| **tech** | `tpl-tech-epic.md` | `/docs/{{EPIC_DIR}}/tech/TECH-{{EPIC_ID}}-v{{N}}.md` | Epic 技术方案（现状/方案/设计/NFR/TASK 建议） |
-| **tech/proj** | `tpl-task.md` | `/docs/{{EPIC_DIR}}/task/TASK-*.md` | 任务卡片（可执行、可验收） |
+| **biz-owner** | `tpl-biz-overview.md` | `/docs-vibe/_project/biz-overview.md` | 业务概览（商业模式、目标、Epic 列表） |
+| **prd** | `tpl-prd.md` | `/docs-vibe/{{EPIC_DIR}}/prd/PRD-{{EPIC_ID}}-v{{N}}.md` | Epic PRD（v0 探索版、v1 可开发版） |
+| **prd** | `tpl-story.md` | `/docs-vibe/{{EPIC_DIR}}/story/STORY-*.md` | 用户故事（厚 Story：主路径/状态机/AC/边界/契约） |
+| **prd** | `tpl-slice-spec.md` | `/docs-vibe/{{EPIC_DIR}}/slice/SLICE-{{EPIC_ID}}-*.md` | 竖切闭环规格（驱动 TASK 拆解） |
+| **tech** | `tpl-tech-epic.md` | `/docs-vibe/{{EPIC_DIR}}/tech/TECH-{{EPIC_ID}}-v{{N}}.md` | Epic 技术方案（现状/方案/设计/NFR/TASK 建议） |
+| **tech/proj** | `tpl-task.md` | `/docs-vibe/{{EPIC_DIR}}/task/TASK-*.md` | 任务卡片（可执行、可验收） |
 | **tech** | `tpl-code-review-tech.md | 评审时使用 | 代码评审检查项（复用/基线/架构/迁移/NFR） |
-| **proj** | `tpl-proj-epic.md` | `/docs/{{EPIC_DIR}}/proj/PROJ-{{EPIC_ID}}-v{{N}}.md` | Epic 项目计划（范围/排期/里程碑/Gate） |
-| **proj** | `tpl-proj-roadmap.md` | `/docs/_project/proj-roadmap.md` | 业务线 Roadmap（多 Epic 优先级/排期） |
-| **ux** | `tpl-prototype-index.html` | `/docs/{{EPIC_DIR}}/prototypes/index.html` | 可运行 HTML 原型（UI 证据） |
+| **proj** | `tpl-proj-epic.md` | `/docs-vibe/{{EPIC_DIR}}/proj/PROJ-{{EPIC_ID}}-v{{N}}.md` | Epic 项目计划（范围/排期/里程碑/Gate） |
+| **proj** | `tpl-proj-roadmap.md` | `/docs-vibe/_project/proj-roadmap.md` | 业务线 Roadmap（多 Epic 优先级/排期） |
+| **ux** | `tpl-prototype-index.html` | `/docs-vibe/{{EPIC_DIR}}/prototypes/index.html` | 可运行 HTML 原型（UI 证据） |
 
 ## 模板内容结构速查
 
@@ -159,7 +159,7 @@
 
 ## 模板文件位置
 
-所有模板文件位于：`/docs/lib/templates/`
+所有模板文件位于：`/docs-vibe/lib/templates/`
 
 ## 使用建议
 

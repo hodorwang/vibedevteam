@@ -6,7 +6,7 @@
 # 功能：生成任务依赖可视化图（使用 Graphviz DOT 格式）
 #
 # 示例：
-#   ./scripts/beads-graph.sh E-014 --output docs/E-014-私聊聊天记录功能/dependencies.svg
+#   ./scripts/beads-graph.sh E-014 --output docs-vibe/E-014-私聊聊天记录功能/dependencies.svg
 #
 # 依赖：需要安装 Graphviz (brew install graphviz)
 
@@ -33,12 +33,12 @@ if [ -z "$EPIC_ID" ]; then
   echo "用法: $0 <EPIC_ID> --output <OUTPUT_FILE>"
   echo ""
   echo "示例:"
-  echo "  $0 E-014 --output docs/E-014-私聊聊天记录功能/dependencies.svg"
+  echo "  $0 E-014 --output docs-vibe/E-014-私聊聊天记录功能/dependencies.svg"
   exit 1
 fi
 
 if [ -z "$OUTPUT_FILE" ]; then
-  OUTPUT_FILE="docs/${EPIC_ID}-dependencies.svg"
+  OUTPUT_FILE="docs-vibe/${EPIC_ID}-dependencies.svg"
   echo "⚠️  未指定输出文件，使用默认: $OUTPUT_FILE"
 fi
 

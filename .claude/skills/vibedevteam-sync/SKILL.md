@@ -19,7 +19,7 @@ version: 0.3.0
 ## 执行步骤
 
 1. **确认参数**
-   - PROJ 文件路径（如：docs/E-014-xxx/proj/PROJ-E-014-v1.md）
+   - PROJ 文件路径（如：docs-vibe/E-014-xxx/proj/PROJ-E-014-v1.md）
 
 2. **验证前置条件**
    ```bash

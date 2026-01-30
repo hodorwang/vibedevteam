@@ -1,6 +1,6 @@
 # TECH Epic - v0（E-000）
 
-> 建议文件路径：`/docs/E-000-Agent-Workflow-Demo/tech/TECH-E-000-v0.md`
+> 建议文件路径：`/docs-vibe/E-000-Agent-Workflow-Demo/tech/TECH-E-000-v0.md`
 >
 > 目标：把示例 PRD/Story/Slice 翻译成可运行的静态原型与文档链路，无需后端。
 
@@ -33,11 +33,11 @@
 ### 2.1 相关代码/系统现状
 
 - 本仓库暂无业务代码，仅有 docs 与 agents 配置。
-- 原型可放在 `docs/.../prototypes/index.html`，浏览器直接打开。
+- 原型可放在 `docs-vibe/.../prototypes/index.html`，浏览器直接打开。
 
 ### 2.2 复用清单
 
-- 直接复用模板：`docs/lib/templates/tpl-prototype-index.html`（样式参考，按需简化）。
+- 直接复用模板：`docs-vibe/lib/templates/tpl-prototype-index.html`（样式参考，按需简化）。
 - 复用文档模板：PRD/Story/Slice/Task/Proj。
 
 ### 2.3 硬约束
@@ -52,7 +52,7 @@
 - 方案一句话：提供静态 HTML 原型演示状态切换，并链接到示例文档。
 - 架构变化概览：无代码层架构；仅文档+静态资源。
 - 关键 trade-off：选择纯静态，牺牲真实数据，换取零依赖可复制性。
-- 影响面：新增 `docs/E-000-Agent-Workflow-Demo/**` 示例目录。
+- 影响面：新增 `docs-vibe/E-000-Agent-Workflow-Demo/**` 示例目录。
 
 ---
 

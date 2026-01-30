@@ -1,6 +1,6 @@
 # Agent Workflow Demo PRD - v0（E-000）
 
-> 文档路径：`/docs/E-000-Agent-Workflow-Demo/prd/PRD-E-000-v0.md`
+> 文档路径：`/docs-vibe/E-000-Agent-Workflow-Demo/prd/PRD-E-000-v0.md`
 >
 > * EPIC_ID：E-000
 > * EPIC_DIR：`E-000-Agent-Workflow-Demo`
@@ -14,7 +14,7 @@
 
 ## 0. 关联信息（References）
 
-* biz-overview：`/docs/_project/biz-overview.md`（示例，未创建）
+* biz-overview：`/docs-vibe/_project/biz-overview.md`（示例，未创建）
 * Story：`../story/STORY-E-000-001-demo.md`
 * Tech Design：`../tech/TECH-E-000-v0.md`
 * Proj Plan：`../proj/PROJ-E-000-v1.md`
@@ -72,7 +72,7 @@
 
 ## 6.1 UI 证据（Evidence）
 
-* 原型：`/docs/E-000-Agent-Workflow-Demo/prototypes/index.html`
+* 原型：`/docs-vibe/E-000-Agent-Workflow-Demo/prototypes/index.html`
 * 截图/录屏（可选）：[OPEN]
 * 关键状态说明：
   * 空态：无输入，页面提示“点击开始”。

@@ -20,7 +20,7 @@ version: 0.3.0
 
 1. **确认参数**
    - EPIC_ID（如：E-014）
-   - TASK_DIR（如：docs/E-014-xxx/task）
+   - TASK_DIR（如：docs-vibe/E-014-xxx/task）
 
 2. **验证前置条件**
    ```bash

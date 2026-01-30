@@ -6,7 +6,7 @@
 # 功能：从 beads 批量同步状态到 PROJ 文档
 #
 # 示例：
-#   ./scripts/beads-sync-proj.sh docs/E-014-私聊聊天记录功能/proj/PROJ-E-014-v1.md
+#   ./scripts/beads-sync-proj.sh docs-vibe/E-014-私聊聊天记录功能/proj/PROJ-E-014-v1.md
 #
 # 注意：此脚本会更新 PROJ 文档中的任务状态，建议在执行前备份
 
@@ -18,7 +18,7 @@ if [ -z "$PROJ_FILE" ]; then
   echo "用法: $0 <PROJ_FILE>"
   echo ""
   echo "示例:"
-  echo "  $0 docs/E-014-私聊聊天记录功能/proj/PROJ-E-014-v1.md"
+  echo "  $0 docs-vibe/E-014-私聊聊天记录功能/proj/PROJ-E-014-v1.md"
   exit 1
 fi
 

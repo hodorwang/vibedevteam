@@ -1,6 +1,6 @@
 # {{STORY_ID}} {{STORY_TITLE}}
 
-> 文档路径：`/docs/{{EPIC_DIR}}/story/{{STORY_ID}}-{{STORY_TITLE}}.md`
+> 文档路径：`/docs-vibe/{{EPIC_DIR}}/story/{{STORY_ID}}-{{STORY_TITLE}}.md`
 
 * EPIC_ID：{{EPIC_ID}}
 * EPIC_DIR：`{{EPIC_DIR}}`
@@ -88,7 +88,7 @@
 
 ## 4.3 UI 证据（Evidence）（推荐）
 
-* 原型：`/docs/{{EPIC_DIR}}/prototypes/index.html`（或截图/录屏链接）
+* 原型：`/docs-vibe/{{EPIC_DIR}}/prototypes/index.html`（或截图/录屏链接）
 
 ---
 
